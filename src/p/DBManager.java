@@ -26,6 +26,38 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
+	public  void SerializeDVMap(HashMap<String, String> dvMap)
+	{
+        try
+        {
+               FileOutputStream fos =
+                  new FileOutputStream("dvhashmap.ser");
+               ObjectOutputStream oos = new ObjectOutputStream(fos);
+               oos.writeObject(dvMap);
+               oos.close();
+               fos.close();
+               System.out.println("Serialized HashMap data is saved in dvhashmap.ser");
+        }catch(IOException ioe)
+         {
+               ioe.printStackTrace();
+         }
+	}
+	public  void SerializePayMap(HashMap<Integer, Payment> payMap)
+	{
+        try
+        {
+               FileOutputStream fos =
+                  new FileOutputStream("dvhashmap.ser");
+               ObjectOutputStream oos = new ObjectOutputStream(fos);
+               oos.writeObject(payMap);
+               oos.close();
+               fos.close();
+               System.out.println("Serialized HashMap data is saved in payhashmap.ser");
+        }catch(IOException ioe)
+         {
+               ioe.printStackTrace();
+         }
+	}
 	public  void SerializeRideMap(HashMap<Integer, Ride> rideMap)
 	{
         try
@@ -85,8 +117,49 @@ public class DBManager{
 		      return rmap;
 		}
 
+	public  HashMap<Integer, Payment> DeserializePayMap()
+	{
+		      HashMap<Integer, Payment> pmap = null;
+		      try
+		      {
+		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
+		         ObjectInputStream ois = new ObjectInputStream(fis);
+		         pmap = (HashMap) ois.readObject();
+		         System.out.println("Deserialized HashMap data" + pmap);
+		         ois.close();
+		         fis.close();
+		      }catch(IOException ioe)
+		      {
+		         ioe.printStackTrace();
+		      }catch(ClassNotFoundException c)
+		      {
+		         System.out.println("Class not found");
+		         c.printStackTrace();
+		      }
+		      return pmap;
+		}
+	public  HashMap<String, String> DeserializeDVMap()
+	{
+		      HashMap<String, String> dvmap = null;
+		      try
+		      {
+		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
+		         ObjectInputStream ois = new ObjectInputStream(fis);
+		         dvmap = (HashMap) ois.readObject();
+		         System.out.println("Deserialized HashMap data" + dvmap);
+		         ois.close();
+		         fis.close();
+		      }catch(IOException ioe)
+		      {
+		         ioe.printStackTrace();
+		      }catch(ClassNotFoundException c)
+		      {
+		         System.out.println("Class not found");
+		         c.printStackTrace();
+		      }
+		      return dvmap;
+		}
 		
 	}
-}
 
 
