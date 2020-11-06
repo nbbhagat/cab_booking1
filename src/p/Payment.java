@@ -1,9 +1,10 @@
 package p;
 
+import java.io.Serializable;
 import java.time.LocalDateTime; 
 import java.util.UUID;
 
-public class Payment {
+public class Payment implements Serializable{
 	String mode;
 	int amount;
 	String status;
