@@ -5,12 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.io.Serializable;
 
 
 public class DBManager{
-	public  void SerializeUserMap(HashMap<Integer, User> userMap)
+	public  void SerializeUserMap(ConcurrentHashMap<Integer, User> userMap)
 	{
         try
         {
@@ -26,7 +26,7 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  void SerializeDVMap(HashMap<String, String> dvMap)
+	public  void SerializeDVMap(ConcurrentHashMap<String, String> dvMap)
 	{
         try
         {
@@ -42,7 +42,7 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  void SerializePayMap(HashMap<Integer, Payment> payMap)
+	public  void SerializePayMap(ConcurrentHashMap<Integer, Payment> payMap)
 	{
         try
         {
@@ -58,7 +58,7 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  void SerializeRideMap(HashMap<Integer, Ride> rideMap)
+	public  void SerializeRideMap(ConcurrentHashMap<Integer, Ride> rideMap)
 	{
         try
         {
@@ -74,14 +74,14 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  HashMap<Integer, User> DeserializeUserMap()
+	public  ConcurrentHashMap<Integer, User> DeserializeUserMap()
 	{
-		      HashMap<Integer, User> umap = null;
+		ConcurrentHashMap<Integer, User> umap = null;
 		      try
 		      {
 		         FileInputStream fis = new FileInputStream("userhashmap.ser");
 		         ObjectInputStream ois = new ObjectInputStream(fis);
-		         umap = (HashMap) ois.readObject();
+		         umap = (ConcurrentHashMap) ois.readObject();
 		         System.out.println("Deserialized HashMap data" + umap);
 		         ois.close();
 		         fis.close();
@@ -95,14 +95,14 @@ public class DBManager{
 		      }
 		      return umap;
 			}
-	public  HashMap<Integer, Ride> DeserializeRideMap()
+	public  ConcurrentHashMap<Integer, Ride> DeserializeRideMap()
 	{
-		      HashMap<Integer, Ride> rmap = null;
+		ConcurrentHashMap<Integer, Ride> rmap = null;
 		      try
 		      {
 		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
 		         ObjectInputStream ois = new ObjectInputStream(fis);
-		         rmap = (HashMap) ois.readObject();
+		         rmap = (ConcurrentHashMap) ois.readObject();
 		         System.out.println("Deserialized HashMap data" + rmap);
 		         ois.close();
 		         fis.close();
@@ -117,14 +117,14 @@ public class DBManager{
 		      return rmap;
 		}
 
-	public  HashMap<Integer, Payment> DeserializePayMap()
+	public  ConcurrentHashMap<Integer, Payment> DeserializePayMap()
 	{
-		      HashMap<Integer, Payment> pmap = null;
+		ConcurrentHashMap<Integer, Payment> pmap = null;
 		      try
 		      {
 		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
 		         ObjectInputStream ois = new ObjectInputStream(fis);
-		         pmap = (HashMap) ois.readObject();
+		         pmap = (ConcurrentHashMap) ois.readObject();
 		         System.out.println("Deserialized HashMap data" + pmap);
 		         ois.close();
 		         fis.close();
@@ -138,14 +138,14 @@ public class DBManager{
 		      }
 		      return pmap;
 		}
-	public  HashMap<String, String> DeserializeDVMap()
+	public  ConcurrentHashMap<String, String> DeserializeDVMap()
 	{
-		      HashMap<String, String> dvmap = null;
+		ConcurrentHashMap<String, String> dvmap = null;
 		      try
 		      {
 		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
 		         ObjectInputStream ois = new ObjectInputStream(fis);
-		         dvmap = (HashMap) ois.readObject();
+		         dvmap = (ConcurrentHashMap) ois.readObject();
 		         System.out.println("Deserialized HashMap data" + dvmap);
 		         ois.close();
 		         fis.close();
