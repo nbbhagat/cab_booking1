@@ -3,7 +3,7 @@ package p;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Admin {
-	public void addPassenger(MemManager mmap,String userId,String name,int pno, String pwd,Location location, Address addr)
+	public void registerPassenger(MemManager mmap,String userId,String name,int pno, String pwd,Location location, Address addr)
 	{
 		User p=new Passenger(userId, name, pno, pwd, location, addr);
         mmap.userMap.put(p.userId,p);
@@ -11,7 +11,7 @@ public class Admin {
 		
 	}
 	
-	public void addDriver(MemManager mmap, String userId, String name, int pno, String pwd,Location location, boolean status)
+	public void registerDriver(MemManager mmap, String userId, String name, int pno, String pwd,Location location, boolean status)
 	{
 		User d=new Driver(userId, name, pno, pwd, location, status);
         mmap.userMap.put(d.userId,d);
@@ -19,7 +19,7 @@ public class Admin {
 		
 	}
 	
-	public void delPassenger(MemManager mmap, String userId)
+	public void deletePassenger(MemManager mmap, String userId)
 	{
 		User p=mmap.userMap.get(userId);
 		if(p!=null)
@@ -34,7 +34,7 @@ public class Admin {
 
 	}
 	
-	public void delDriver(MemManager mmap, String userId)
+	public void deleteDriver(MemManager mmap, String userId)
 	{
 		User d=mmap.userMap.get(userId);
 		if(d!=null)
@@ -56,7 +56,7 @@ public class Admin {
 		System.out.println("Vehicle "+vehicleId+" mapped to Driver "+userId);
 	}
 	
-	public void viewRecord(MemManager mmap,String userId)
+	public void viewUserRecord(MemManager mmap,String userId)
 	{
 		User u=mmap.userMap.get(userId);
 		if(u!=null)
