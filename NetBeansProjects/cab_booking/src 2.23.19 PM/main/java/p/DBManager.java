@@ -26,14 +26,14 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  void serializeDVMap(ConcurrentHashMap<String, String> dvMap)
+	public  void serializeDVMap(ConcurrentHashMap<String, Vehicle> driverVehicle)
 	{
         try
         {
                FileOutputStream fos =
                   new FileOutputStream("dvhashmap.ser");
                ObjectOutputStream oos = new ObjectOutputStream(fos);
-               oos.writeObject(dvMap);
+               oos.writeObject(driverVehicle);
                oos.close();
                fos.close();
                System.out.println("Serialized HashMap data is saved in dvhashmap.ser");
@@ -138,9 +138,9 @@ public class DBManager{
 		      }
 		      return pmap;
 		}
-	public  ConcurrentHashMap<String, String> deserializeDVMap()
+	public  ConcurrentHashMap<String, Vehicle> deserializeDVMap()
 	{
-		ConcurrentHashMap<String, String> dvmap = null;
+		ConcurrentHashMap<String, Vehicle> dvmap = null;
 		      try
 		      {
 		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
