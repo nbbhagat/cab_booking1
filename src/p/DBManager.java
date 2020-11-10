@@ -47,7 +47,7 @@ public class DBManager{
         try
         {
                FileOutputStream fos =
-                  new FileOutputStream("dvhashmap.ser");
+                  new FileOutputStream("payhashmap.ser");
                ObjectOutputStream oos = new ObjectOutputStream(fos);
                oos.writeObject(payMap);
                oos.close();
@@ -74,7 +74,7 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  ConcurrentHashMap<Integer, User> DeserializeUserMap()
+	public  ConcurrentHashMap<Integer, User> deserializeUserMap()
 	{
 		ConcurrentHashMap<Integer, User> umap = null;
 		      try
@@ -95,7 +95,7 @@ public class DBManager{
 		      }
 		      return umap;
 			}
-	public  ConcurrentHashMap<Integer, Ride> DeserializeRideMap()
+	public  ConcurrentHashMap<Integer, Ride> deserializeRideMap()
 	{
 		ConcurrentHashMap<Integer, Ride> rmap = null;
 		      try
@@ -117,7 +117,7 @@ public class DBManager{
 		      return rmap;
 		}
 
-	public  ConcurrentHashMap<Integer, Payment> DeserializePayMap()
+	public  ConcurrentHashMap<Integer, Payment> deserializePayMap()
 	{
 		ConcurrentHashMap<Integer, Payment> pmap = null;
 		      try
@@ -138,7 +138,7 @@ public class DBManager{
 		      }
 		      return pmap;
 		}
-	public  ConcurrentHashMap<String, String> DeserializeDVMap()
+	public  ConcurrentHashMap<String, String> deserializeDVMap()
 	{
 		ConcurrentHashMap<String, String> dvmap = null;
 		      try
