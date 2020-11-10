@@ -7,13 +7,15 @@ public class User implements java.io.Serializable{
     String password;
     Location location=null;
     float avgRating=0;
-    public User(int userId, String name, int phoneNo,int numRides,String password,int latitude,int longitude){
+    String region;
+    public User(int userId, String name, int phoneNo,int numRides,String password,int latitude,int longitude, String region){
         this.userId=userId;
         this.name=name;
         this.phoneNo=phoneNo;
         //this.numRides=numRides;
         this.password=password;
         this.location=new Location(latitude,longitude);
+        this.region = region;
     }
     public void setNumRides() {
         this.numRides++;
