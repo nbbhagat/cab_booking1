@@ -6,14 +6,16 @@ public class User {
     int numRides=0;
     String password;
     Location location;
+    String region;
     float avgRating=0;
-    public User(int userId, String name, int phoneNo,int numRides,String password,Location location){
+    public User(int userId, String name, int phoneNo,int numRides,String password,Location location, String region){
         this.userId=userId;
         this.name=name;
         this.phoneNo=phoneNo;
         //this.numRides=numRides;
         this.password=password;
         this.location=location;
+        this.region=region;
     }
     public void setNumRides() {
         this.numRides++;
