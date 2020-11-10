@@ -22,28 +22,25 @@ public Payment(String mode, int amount, String bid,String passID)
 	this.BookingID=bid;
 	this.passID=passID;
 	this.PaymentID=UUID.randomUUID().toString();
+	this.status="Payment Initiated";
 }
+
+public String toString()
+{
+	return "Mode : "+this.mode +" Amount : "+this.amount +" Status : "+this.status+" PaymentID : "+this.PaymentID;
+}
+
 public void processPayment()
 {
 	if (mode=="cash")
 	{
-		
+		System.out.println("Paid in cash to driver");
 	}
-	else if(mode=="netbanking")
+	else if(mode=="ewallet")
 	{
-		System.out.println("Enter card Number :");
-		System.out.println("Enter Pin :");
-		System.out.println("Enter ExpMonth :");
-		System.out.println("Enter ExpYear :");
+		System.out.println("Paid using ewallet");
 		
 	}
-	else
-	{
-		
-	}
-}
-public void updateStatus() {
-	//if driver has accepted cash return success
-	//If bank returns successful payment return success
+	this.status="Success";
 }
 }
