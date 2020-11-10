@@ -14,4 +14,8 @@ public class Vehicle {
         this.baseFare = baseFare;
         this.factor = factor;
     }
+    @Override
+    public String toString(){
+        return "vId-> "+vId+", type-> "+type+", capacity-> "+capacity;
+    }
 }
