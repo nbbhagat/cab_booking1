@@ -1,17 +1,18 @@
 package p;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap; 
+import java.util.*; 
 
-public class MemManager {
-	public HashMap<Integer, User> userMap;
-	public HashMap<Integer, Ride> rideMap;
-	public HashMap<Integer, Payment> payMap;
-	public HashMap<String, String> driverVehicle;
+public class MemManager { 
+	public ConcurrentHashMap<Integer, User> userMap;
+	public ConcurrentHashMap<Integer, Ride> rideMap;
+	public ConcurrentHashMap<Integer, Payment> payMap;
+	public ConcurrentHashMap<String, String> driverVehicle;
 	
 	public void mapInit()
 	{
-		userMap = new HashMap<>();
-		rideMap = new HashMap<>();
-		payMap = new HashMap<>();
-		driverVehicle = new HashMap<>();
+		userMap = new ConcurrentHashMap<>();
+		rideMap = new ConcurrentHashMap<>();
+		payMap = new ConcurrentHashMap<>();
+		driverVehicle = new ConcurrentHashMap<>();
 	} 
 }
