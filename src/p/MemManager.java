@@ -8,11 +8,20 @@ public class MemManager {
 	public ConcurrentHashMap<Integer, Payment> payMap;
 	public ConcurrentHashMap<String, String> driverVehicle;
 	
-	public void mapInit()
+	public void userMapInit()
 	{
 		userMap = new ConcurrentHashMap<>();
+	}
+	public void rideMapInit()
+	{
 		rideMap = new ConcurrentHashMap<>();
+	}
+	public void payMapInit()
+	{
 		payMap = new ConcurrentHashMap<>();
+	}
+	public void dvMapInit()
+	{
 		driverVehicle = new ConcurrentHashMap<>();
 	} 
 }
