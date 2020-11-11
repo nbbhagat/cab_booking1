@@ -1,5 +1,5 @@
 package p;
-public class Location {
+public class Location implements java.io.Serializable{
     int latitude;
     int longitude;
     public Location(){

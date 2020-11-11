@@ -30,7 +30,7 @@ public class CabApp {
 
         } else {
             System.out.println("Creating user map for the first time");
-            MManager.userMapInit();
+            MManager.userBookingInit();
             System.out.println(MManager.userBooking);
         }
         if (dvf.exists()) {
@@ -91,8 +91,15 @@ public class CabApp {
                                     System.out.println("Enter Password - ");
                                     String pwd = addInput.next();
                                     System.out.println("Enter Location - ");
-                                    Location l = new Location();
-                                    AObj.registerPassenger(MManager, name, pno, pwd, l);
+                                    System.out.println("Enter your current Location:\nLatitude: ");
+                                    int sLatitude = addInput.nextInt();
+                                    System.out.println("Longitude: ");
+                                    int sLongitude = addInput.nextInt();
+                                    Location l = new Location(sLatitude,sLongitude);
+                                    
+                                    System.out.println("Enter region - ");
+                                    String region=addInput.next();
+                                    AObj.registerPassenger(MManager, name, pno, pwd, l,region);
                                     break;
                                 }
                             case 2: //Driver Registration
@@ -111,8 +118,38 @@ public class CabApp {
                                     Boolean status = addInput.nextBoolean();
                                     //add vehicle details
                                     //create vehicle object
-                                    Vehicle vehicle = new Vehicle();
-                                    AObj.registerDriver(MManager, name, pno, pwd, l, status, vehicle);
+                                    System.out.println("Enter region - ");
+                                    String region=addInput.next();
+                                    System.out.println("Enter the vehicle type");
+                                    System.out.println("1. Auto \n 2.Bike \n 3. Car");
+                                    int type=addInput.nextInt();
+                                    switch(type){
+                                            case 1 : {
+                                                Auto auto=new Auto();
+                                                auto.setId();
+                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, auto,region);
+                                                break;
+                                            }
+
+                                            case 2 :
+                                            {
+                                               Bike bike=new Bike();
+                                                bike.setId();
+                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, bike,region);
+                                                break;
+                                            }
+                                            case 3 :
+                                            {
+                                                Car car=new Car();
+                                                car.setId() ;
+                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, car,region);
+                                                break;
+                                            }
+
+                                        }
+                                    
+                                    
+                                    
                                     break;
                                 }
                         }
@@ -121,139 +158,143 @@ public class CabApp {
                     }
                 case 2: //Login
                     {
+                        
                         Scanner addInput = new Scanner(System.in);
-                        System.out.println("1. Passenger Login");
-                        System.out.println("2. Driver Login");
-                        System.out.println("Enter an option - ");
-                        int option2 = addInput.nextInt();
-                        switch (option2) {
-                            case 1:
-                                { //Passenger Login
-                                    //Passenger login code
-                                    System.out.println("1. Book Cab");
-                                    System.out.println("2. View Ride History");
-                                    System.out.println("3. View Payment History");
-                                    System.out.println("Enter an option - ");
-                                    int option3 = addInput.nextInt();
-                                    switch (option3) {
-                                        case 1:
-                                            { //Book Cab
-                                                System.out.println("Enter your region:");
-                                                String region = addInput.next();
-                                                System.out.println("Enter your current Location:\nLatitude: ");
-                                                int sLatitude = addInput.nextInt();
-                                                System.out.println("Longitude: ");
-                                                int sLongitude = addInput.nextInt();
-                                                System.out.println("Select preferred vehicle type:\n1. ");
-                                                String vehicleType = addInput.next(); //must change
-                                                System.out.println("Enter destination \nLatitude");
-                                                int dLatitude = addInput.nextInt();
-                                                System.out.println("Longitude: ");
-                                                int dLongitude = addInput.nextInt();
-                                                System.out.println("Searching for cabs...");
-                                                BookingMgmt bm = new BookingMgmt(passengerID, MManager);
-                                                Location source = new Location(sLatitude, sLongitude);
-                                                Location dest = new Location(dLatitude, dLongitude);
-                                                String availableDriverID = bm.findNearestCab(source, region, vehicleType, MManager);
-                                                System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
-                                                int confirmation = addInput.nextInt();
-                                                switch (confirmation) { //Confirm initially
-                                                    case 1:
-                                                        {
-                                                            System.out.println("Your cab will arrive shortly\n1.Confirm arrival of cab and start ride");
-                                                            System.out.println("2. Cancel ride (will incur cancellation charges)");
-                                                            int confirmation2 = addInput.nextInt();
-                                                            switch (confirmation2) {
-                                                                case 1:
-                                                                    { //Confirm ride start
-                                                                        System.out.println("Ride has started!");
-                                                                        Ride r = bm.startRide(source, dest, MManager, availableDriverID);
-                                                                        System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
-                                                                        String arrived = addInput.next();
-                                                                        System.out.println("You have arrived at your destination! Please rate your ride (1-5):");
-                                                                        int rating = addInput.nextInt();
-                                                                        Vehicle v = new Vehicle(); //change
-                                                                        double amount = bm.calculateFare(source, dest, v);
-                                                                        bm.endRide(r, rating, MManager, availableDriverID);
-                                                                        System.out.println("Please select your mode of payment");
-                                                                        System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
-                                                                        int option4 = addInput.nextInt();
-                                                                        switch (option4) {
-                                                                            case 1:
-                                                                                { //Cash
-                                                                                    bm.makePayment("cash", amount, MManager, passengerID);
-                                                                                    break;
-                                                                                }
-                                                                            case 2:
-                                                                                { //E-Wallet
-                                                                                    bm.makePayment("ewallet", amount, MManager, passengerID);
-                                                                                    break;
-                                                                                }
-                                                                        }
-                                                                        break;
+                        System.out.println("1. Enter UserId and passwprd");
+                        String userId=addInput.next();
+                        String userPass=addInput.next();
+                        User u=MManager.userMap.get(userId);
+                        if(userId.charAt(0)=='P'&&u.password.equals(userPass)){
+                             System.out.println("1. Book Cab");
+                                System.out.println("2. View Ride History");
+                                System.out.println("3. View Payment History");
+                                System.out.println("Enter an option - ");
+                                int option3 = addInput.nextInt();
+                                switch (option3) {
+                                    case 1:
+                                        { //Book Cab
+                                            System.out.println("Enter your region:");
+                                            String region = addInput.next();
+                                            System.out.println("Enter your current Location:\nLatitude: ");
+                                            int sLatitude = addInput.nextInt();
+                                            System.out.println("Longitude: ");
+                                            int sLongitude = addInput.nextInt();
+                                            System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
+                                            char vehicleType = addInput.next().charAt(0); //must change
+                                            System.out.println("Enter destination \nLatitude");
+                                            int dLatitude = addInput.nextInt();
+                                            System.out.println("Longitude: ");
+                                            int dLongitude = addInput.nextInt();
+                                            System.out.println("Searching for cabs...");
+                                            BookingMgmt bm = new BookingMgmt(userId, MManager);
+                                            Location source = new Location(sLatitude, sLongitude);
+                                            Location dest = new Location(dLatitude, dLongitude);
+                                            String availableDriverID = bm.findNearestCab(source, region, vehicleType, MManager);
+                                            System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
+                                            int confirmation = addInput.nextInt();
+                                            switch (confirmation) { //Confirm initially
+                                                case 1:
+                                                    {
+                                                        System.out.println("Your cab will arrive shortly\n1.Confirm arrival of cab and start ride");
+                                                        System.out.println("2. Cancel ride (will incur cancellation charges)");
+                                                        int confirmation2 = addInput.nextInt();
+                                                        switch (confirmation2) {
+                                                            case 1:
+                                                                { //Confirm ride start
+                                                                    System.out.println("Ride has started!");
+                                                                    Ride r = bm.startRide(source, dest, MManager, availableDriverID);
+                                                                    System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
+                                                                    String arrived = addInput.next();
+                                                                    System.out.println("You have arrived at your destination! Please rate your ride (1-5):");
+                                                                    int rating = addInput.nextInt();
+                                                                    
+                                                                    
+                                                                    double amount = bm.calculateFare(source, dest,MManager.driverVehicle.get(availableDriverID) );
+                                                                    bm.endRide(r, rating, MManager, availableDriverID);
+                                                                    System.out.println("Please select your mode of payment");
+                                                                    System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
+                                                                    int option4 = addInput.nextInt();
+                                                                    switch (option4) {
+                                                                        case 1:
+                                                                            { //Cash
+                                                                                bm.makePayment("cash", amount, MManager, userId);
+                                                                                break;
+                                                                            }
+                                                                        case 2:
+                                                                            { //E-Wallet
+                                                                                bm.makePayment("ewallet", amount, MManager, userId);
+                                                                                break;
+                                                                            }
                                                                     }
-                                                                case 2:
-                                                                    { //Cancel ride
-                                                                        System.out.println("Your cancellation charges are: " + bm.cancelAmount);
-                                                                        System.out.println("Please select your mode of payment");
-                                                                        System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
-                                                                        int option4 = addInput.nextInt();
-                                                                        switch (option4) {
-                                                                            case 1:
-                                                                                { //cash
-                                                                                    bm.cancelRide("cash", MManager, passengerID);
-                                                                                    break;
-                                                                                }
-                                                                            case 2:
-                                                                                { //e-wallet
-                                                                                    bm.cancelRide("ewallet", MManager, passengerID);
-                                                                                    break;
-                                                                                }
-                                                                        }
-                                                                        break;
-                                                                    } //case 2
-                                                            } //switch
-                                                            break;
-                                                        } //confirmation case 1
-                                                    case 2:
-                                                        {
-                                                            break;
-                                                        }
-                                                }
-                                                break;
+                                                                    break;
+                                                                }
+                                                            case 2:
+                                                                { //Cancel ride
+                                                                    System.out.println("Your cancellation charges are: " + bm.cancelAmount);
+                                                                    System.out.println("Please select your mode of payment");
+                                                                    System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
+                                                                    int option4 = addInput.nextInt();
+                                                                    switch (option4) {
+                                                                        case 1:
+                                                                            { //cash
+                                                                                bm.cancelRide("cash", MManager, userId);
+                                                                                break;
+                                                                            }
+                                                                        case 2:
+                                                                            { //e-wallet
+                                                                                bm.cancelRide("ewallet", MManager, userId);
+                                                                                
+                                                                                break;
+                                                                            }
+                                                                    }
+                                                                    break;
+                                                                } //case 2
+                                                        } //switch
+                                                        break;
+                                                    } //confirmation case 1
+                                                case 2:
+                                                    {
+                                                        System.out.println("u have cancelled your booking");
+                                                        
+                                                        break;
+                                                    }
                                             }
-                                        case 2:
-                                            {
-                                                break;
-                                            }
-                                        case 3:
-                                            {
-                                                break;
-                                            }
-                                    }
-                                    break;
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            u.viewRideHistory(MManager, userId);
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            u.viewPaymentHistory(MManager, userId);
+                                            break;
+                                        }
                                 }
-                            case 2:
-                                {
+                                break;
+                            }
+                    
+                        else if(userId.charAt(0)=='D'&&u.password.equals(userPass)){
                                     System.out.println("Enter the number according your option");
                                     System.out.println("1. Set status");
                                     System.out.println("2. Update current location");
                                     System.out.println("3. Show ride history");
-                                    String userId = "";
+                                    
                                     Scanner input2 = new Scanner(System.in);
                                     int option_1 = input2.nextInt();
                                     MemManager mmap;
-                                    User d = MManager.userMap.get(userId);
+                                    //User d = MManager.userMap.get(userId);
                                     switch (option_1) {
                                         case 1:
                                             {
 
-                                                boolean status = ((Driver) d).isStatus();
+                                                boolean status = ((Driver) u).isStatus();
                                                 System.out.println("your current status is " + status);
                                                 System.out.println("If u want to change to" + !status + "press 1 otherwise 2");
                                                 int input1 = input.nextInt();
                                                 if (input1 == 1) {
-                                                    ((Driver) d).setStatus();
+                                                    ((Driver) u).setStatus();
                                                     System.out.println("status changed to" + !status);
                                                 } else {
                                                     System.out.println("status not changed to");
@@ -267,22 +308,25 @@ public class CabApp {
                                                 int latitude = input.nextInt();
                                                 int longitude = input.nextInt();
                                                 Location location = new Location(latitude, longitude);
-                                                d.setLocation(location);
+                                                u.setLocation(location);
                                                 System.out.println("Location updated");
                                                 break;
 
                                             }
                                         case 3:
                                             {
-                                                d.viewRideHistory(MManager, userId);
+                                                u.viewRideHistory(MManager, userId);
                                                 break;
                                             }
                                     }
-                                }
-                                break;
                         }
-                    }
-                    break;
+                                    else{
+                                            System.out.println("password incorrect");
+                                            }
+                        break;
+                        }
+                
+                    
             case 3:
                 {
                     AObj.saveAndExit(MManager);

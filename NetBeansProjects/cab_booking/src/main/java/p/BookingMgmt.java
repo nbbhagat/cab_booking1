@@ -9,7 +9,7 @@ public class BookingMgmt {
 	String driverID;
 	String bookingID;
 	double cancelAmount = 100.0;
-	int farePerDistance = 10;
+	
 	public BookingMgmt(String passengerID, MemManager mmap) {
             
 		this.bookingID = "B" + UUID.randomUUID().toString();
@@ -18,12 +18,12 @@ public class BookingMgmt {
 		al.add(this.bookingID);
 		mmap.userBooking.put(this.passengerID,al);
 	}
-	public String findNearestCab(Location pLocation, String region, String vehicleType, MemManager mmap) {
+	public String findNearestCab(Location pLocation, String region, char vehicleType, MemManager mmap) {
 		ConcurrentMap<String, Vehicle> map = mmap.driverVehicle;
 		ConcurrentMap<String, Vehicle> availableDrivers = 
 		    map.entrySet()
 		       .stream()
-		       .filter(e -> e.getValue().type == vehicleType)
+		       .filter(e -> e.getValue().vId.charAt(1)== vehicleType)
 		       .filter(e -> ((Driver)mmap.userMap.get(e.getKey())).status == true)
 		       .filter(e -> ((Driver)mmap.userMap.get(e.getKey())).region == region)
 		       .collect(Collectors.toConcurrentMap(Map.Entry::getKey, Map.Entry::getValue));
@@ -45,11 +45,35 @@ public class BookingMgmt {
 		return closestDriver;
 	}
 	public double calculateFare(Location source, Location dest, Vehicle v) {
-		double vFare = (double)v.baseFare;
-		double dFare;
+                String vId=v.getvId();
+                //String str=new String();
+                double vFare=0;
+                double dFare=0;
+                switch(vId.charAt(1)){
+                    case 'A' : {
+                        vFare = ((Auto)v).baseFare;
+                        dFare=((Auto)v).factor;
+                        break;
+                    }
+                        
+                    case 'B' :
+                    {
+                       vFare = ((Bike)v).baseFare;
+                       dFare=((Bike)v).factor;
+                        break;
+                    }
+                    case 'C' :
+                    {
+                         vFare = ((Car)v).baseFare;
+                         dFare=((Car)v).factor;
+                        break;
+                    }
+                    
+                }
+                
+		
 		double distance = distanceBetweenLocations(source, dest);
-		dFare = distance * farePerDistance;
-		return (vFare + dFare);
+		return (vFare +  distance * dFare);
 	}
 	//	if waitingTime concept is added
 	//	public void calculateActualFare() {}

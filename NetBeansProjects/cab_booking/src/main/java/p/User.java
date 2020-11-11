@@ -71,7 +71,7 @@ class Passenger extends User{
     public Passenger(String name, String phoneNo,String password,Location location,String region){
         super(name,phoneNo,password,location,region);
         this.address=address;
-        this.userId="p"+UUID.randomUUID().toString();
+        this.userId="P"+UUID.randomUUID().toString();
     }
     @Override
     public String toString(){
@@ -83,7 +83,7 @@ class Driver extends User{
         public Driver(String name, String phoneNo,String password,Location location, boolean status,Vehicle vehicle,String region){
                 super(name,phoneNo,password,location,region);
                 this.status=status;
-                this.userId="d"+UUID.randomUUID().toString();
+                this.userId="D"+UUID.randomUUID().toString();
         }
 
         public boolean isStatus() {
