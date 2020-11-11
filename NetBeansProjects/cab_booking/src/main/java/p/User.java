@@ -15,7 +15,6 @@ public class User implements java.io.Serializable {
 
     }
     public User(String name, String phoneNo,String password,Location location,String region){
-        this.userId=userId;
         this.name=name;
         this.phoneNo=phoneNo;
         this.password=password;
@@ -25,22 +24,21 @@ public class User implements java.io.Serializable {
     public void setNumRides() {
         this.numRides++;
     }
-    public int getNumRides() {
-        return numRides;
-    }
-    public float getAvgRating() {
-        return avgRating;
-    }
-    public void setAvgRating(int rating) {
-        this.avgRating=avgRating+(rating-avgRating)/(numRides);
-    }
     public Location getLocation() {
         return location;
     }
     public void setLocation(Location location) {
         this.location = location;
     }
-        public  void viewRideHistory(MemManager mmap,String userId){
+    public int getNumRides() {
+        return numRides;
+    }
+    
+    public void setAvgRating(int rating) {
+        this.avgRating=avgRating+(rating-avgRating)/(numRides);
+    }
+    
+    public  void viewRideHistory(MemManager mmap,String userId){
         ArrayList<String> record= mmap.userBooking.get(userId);
             if(record!=null)
             {
@@ -73,6 +71,7 @@ class Passenger extends User{
     public Passenger(String name, String phoneNo,String password,Location location,String region){
         super(name,phoneNo,password,location,region);
         this.address=address;
+        this.userId="p"+UUID.randomUUID().toString();
     }
     @Override
     public String toString(){
