@@ -12,6 +12,7 @@ public class Payment implements Serializable{
 	String BookingID;
 	String PaymentID;
 	String passID;
+	paymentType comments;
 	public enum paymentType {
 	    CANCELLATION_FEE, RIDE_FEE;
 	}
