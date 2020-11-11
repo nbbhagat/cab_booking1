@@ -6,6 +6,9 @@ public class Vehicle {
     int bootSpace;
     int baseFare;
     float factor;
+
+    public Vehicle() {
+    }
     public Vehicle(int vId, String type, int capacity, int bootSpace, int baseFare, float factor) {
         this.vId = vId;
         this.type = type;

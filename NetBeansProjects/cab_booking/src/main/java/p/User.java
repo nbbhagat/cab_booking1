@@ -1,6 +1,6 @@
 package p;
 public class User implements java.io.Serializable{
-    int userId;
+    String userId;
     String name;
     int phoneNo;
     int numRides=0;
@@ -8,13 +8,13 @@ public class User implements java.io.Serializable{
     Location location=null;
     float avgRating=0;
     String region;
-    public User(int userId, String name, int phoneNo,int numRides,String password,int latitude,int longitude, String region){
+    public User(String userId, String name, int phoneNo,String password,Location location, String region){
         this.userId=userId;
         this.name=name;
         this.phoneNo=phoneNo;
         //this.numRides=numRides;
         this.password=password;
-        this.location=new Location(latitude,longitude);
+        this.location=location;
         this.region = region;
     }
     public void setNumRides() {
@@ -38,8 +38,8 @@ public class User implements java.io.Serializable{
 
 class Passenger extends User{
     Address address=null;
-    public Passenger(int userId, String name, int phoneNo,int numRides,String password,int latitude,int longitude,Address address){
-        super(userId,name,phoneNo,numRides,password,latitude,longitude);
+    public Passenger(String userId, String name, int phoneNo,String password,Location location,Address address,String region){
+        super(userId,name,phoneNo,password,location,region);
         this.address=address;
     }
     @Override
@@ -49,8 +49,8 @@ class Passenger extends User{
 }
 class Driver extends User{
     boolean status;
-    public Driver(int userId, String name, int phoneNo,int numRides,String password,int latitude,int longitude, boolean status){
-        super(userId,name,phoneNo,numRides,password,latitude,longitude);
+    public Driver(String userId, String name, int phoneNo,String password,Location location, boolean status,String region){
+        super(userId,name,phoneNo,password,location,region);
         this.status=status;
     }
     @Override

@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import ioproj.Admin;
-import ioproj.Student;
 
 public class CabApp {
 	public static void main(String args[])

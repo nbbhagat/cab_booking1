@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Payment implements Serializable{
 	String mode;
-	int amount;
+	Double amount;
 	String status;
 	LocalDateTime dateTime;
 	String BookingID;
@@ -17,7 +17,7 @@ public class Payment implements Serializable{
 	}
 
 
-public Payment(String mode, int amount, String bid,String passID)
+public Payment(String mode, Double amount, String bid,String passID)
 {
 	this.mode=mode;
 	this.amount=amount; //calculated after ride ends or gets cancelled
@@ -28,18 +28,19 @@ public Payment(String mode, int amount, String bid,String passID)
 	this.status="Payment Initiated";
 }
 
-public String toString()
+        @Override
+        public String toString()
 {
 	return "Mode : "+this.mode +" Amount : "+this.amount +" Status : "+this.status+" PaymentID : "+this.PaymentID;
 }
 
 public void processPayment()
 {
-	if (mode=="cash")
+	if (mode.equals("cash"))
 	{
 		System.out.println("Paid in cash to driver");
 	}
-	else if(mode=="ewallet")
+	else if(mode.equals("ewallet"))
 	{
 		System.out.println("Paid using ewallet");
 		

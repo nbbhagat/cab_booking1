@@ -13,7 +13,7 @@ public class App {
 
     public static void main(String [] args) {
         Address address=new Address();
-            Passenger p= new Passenger(1,"namrata",1,3,"12",3,3,address);
+            //Passenger p= new Passenger(1,"namrata",1,3,"12",3,3,address);
         
     }
 }
