@@ -3,19 +3,21 @@ package p;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Admin {
-	public void registerPassenger(MemManager mmap,String name,String pno, String pwd,Location location, Address addr,String region)
+	public void registerPassenger(MemManager mmap,String name,String pno, String pwd,Location location)
 	{
-		User p=new Passenger( name, pno, pwd, location, addr,region);
+		User p=new Passenger(name, pno, pwd,location);
         mmap.userMap.put(p.userId,p);
         System.out.println("Added details of Passenger "+p.userId);
 		
 	}
 	
-	public void registerDriver(MemManager mmap, String name, String pno, String pwd,Location location, boolean status,String region)
+	public void registerDriver(MemManager mmap, String name, String pno, String pwd,Location location, boolean status,Vehicle vehicle)
 	{
-		User d=new Driver( name, pno, pwd, location, status,region);
+		User d=new Driver(name, pno, pwd, location, status,vehicle);
         mmap.userMap.put(d.userId,d);
         System.out.println("Added details of Driver "+d.userId);
+		mmap.driverVehicle.put(d.userId,vehicle);
+		System.out.println("Vehicle "+vehicle.vId+" mapped to Driver "+d.userId);
 		
 	}
 	
@@ -49,12 +51,10 @@ public class Admin {
 
 	}
 	
-	public void driverVehicle(MemManager mmap, String userId, String vehicleId)
-	{
-		Vehicle v=new Vehicle();
-		mmap.driverVehicle.put(userId,v);
-		System.out.println("Vehicle "+vehicleId+" mapped to Driver "+userId);
-	}
+//	public void driverVehicle(MemManager mmap, String userId, Vehicle vehicle)
+//	{
+//
+//	}
 	
 	public void viewUserRecord(MemManager mmap,String userId)
 	{
