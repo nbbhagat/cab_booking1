@@ -112,9 +112,9 @@ public class DBManager{
 		      }
 		      return umap;
 			}
-	public  ConcurrentHashMap<String, String> deserializeUBMap()
+	public  ConcurrentHashMap<String, ArrayList<String>> deserializeUBMap()
 	{
-		ConcurrentHashMap<String, String> ubmap = null;
+		ConcurrentHashMap<String, ArrayList<String>> ubmap = null;
 		      try
 		      {
 		         FileInputStream fis = new FileInputStream("ubhashmap.ser");
