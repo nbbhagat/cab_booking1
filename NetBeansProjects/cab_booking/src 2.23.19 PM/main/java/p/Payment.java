@@ -12,7 +12,10 @@ public class Payment implements Serializable{
 	String BookingID;
 	String PaymentID;
 	String passID;
-	//When the transaction happens LocalDateTime myObj = LocalDateTime.now();
+	public enum paymentType {
+	    CANCELLATION_FEE, RIDE_FEE;
+	}
+
 
 public Payment(String mode, int amount, String bid,String passID)
 {
@@ -21,7 +24,7 @@ public Payment(String mode, int amount, String bid,String passID)
 	this.dateTime=LocalDateTime.now();
 	this.BookingID=bid;
 	this.passID=passID;
-	this.PaymentID=UUID.randomUUID().toString();
+	this.PaymentID="p"+UUID.randomUUID().toString();
 	this.status="Payment Initiated";
 }
 
