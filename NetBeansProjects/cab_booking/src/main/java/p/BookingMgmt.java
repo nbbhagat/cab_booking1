@@ -10,9 +10,12 @@ public class BookingMgmt {
 	String bookingID;
 	double cancelAmount = 100.0;
 	int farePerDistance = 10;
-	public BookingMgmt(String passengerID) {
+	public BookingMgmt(String passengerID, MemManager mmap) {
 		this.bookingID = UUID.randomUUID().toString();
 		this.passengerID = passengerID;
+                ArrayList<String> al = mmap.userBooking.get(passengerID);
+		al.add(this.bookingID);
+		mmap.userBooking.put(this.passengerID,al);
 	}
 	public String findNearestCab(Location pLocation, String region, String vehicleType, MemManager mmap) {
 		ConcurrentMap<String, Vehicle> map = mmap.driverVehicle;

@@ -79,15 +79,67 @@ public class CabApp {
 			MManager.rideMapInit();
 			System.out.println(MManager.rideMap);
 		}
-		while(true)
+                
+                while(true)
+		{
+			//for driver
+			//if driver
+			System.out.println("Enter the number according your option");
+			System.out.println("1. Set status");
+                        System.out.println("2. Update current location");
+                        System.out.println("3. Show ride history");
+                        String userId="";
+			Scanner input=new Scanner(System.in);
+			int option=input.nextInt();
+                        MemManager mmap;
+                        User d= MManager.userMap.get(userId);
+                        switch(option)
+			{
+			case 1:
+			{
+                                
+                                boolean status=((Driver)d).isStatus();                             
+                                System.out.println("your current status is "+status);
+                                System.out.println("If u want to change to"+ !status+"press 1 otherwise 2");
+                                int input1=input.nextInt();
+                                if(input1==1) {
+                                    ((Driver)d).setStatus();
+                                    System.out.println("status changed to"+!status);
+                                }
+                                else{
+                                    System.out.println("status not changed to");
+                                }
+				break;
+			}
+
+			case 2:
+			{
+				System.out.println("enter your current location");
+                                int latitude=input.nextInt();
+                                int longitude=input.nextInt();
+                                Location location=new Location(latitude,longitude);
+                                d.setLocation(location);
+                                System.out.println("Location updated");
+                                
+			}
+			case 3:
+			{
+				d.viewRideHistory(MManager, userId);
+			}
+                    }
+                }
+		/*while(true)
 		{
 			//cab booking options with save&exit
 			Admin AObj=new Admin();
 			System.out.println("Cab Booking Application");
-			System.out.println("1. Register");
-			System.out.println("2. Login");
-			System.out.println("5. Save and Exit");
-			System.out.println("Enter an option - ");
+			System.out.println("1. Register as a Passenger");
+                        System.out.println("2. Register as a Driver");
+                        System.out.println("3. Delete Passengerr");
+                        System.out.println("4. Delete Driver");
+			System.out.println("5. Assign driver a vehicle");
+			System.out.println("6. View user record ");
+                        System.out.println("7. Save and Exit");
 			Scanner input=new Scanner(System.in);
 			int option=input.nextInt();
 			
@@ -96,15 +148,19 @@ public class CabApp {
 			case 1:
 			{
 				Scanner addInput=new Scanner(System.in);
-				System.out.println("Enter RollNo - ");
-				int rn=addInput.nextInt();
+				System.out.println("Enter name - ");
+				String userId=addInput.next();
+                                System.out.println("Enter Phone Number -");
+                                String phoneNo=addInput.next();
+                                
+                                
 				System.out.println("Enter Name - ");
 				String name=addInput.next();
 				System.out.println("Enter Mark1 - ");
 				int m1=addInput.nextInt();
 				System.out.println("Enter Mark2 - ");
 				int m2=addInput.nextInt();
-				AObj.addStudent(MManager,rn,name,m1,m2);
+				//AObj.addStudent(MManager,rn,name,m1,m2);
 				break;
 			}
 			case 2:
@@ -182,8 +238,9 @@ public class CabApp {
 			
 			
 			}
-		}
+		}*/
 
 		
 	}
 }
+        

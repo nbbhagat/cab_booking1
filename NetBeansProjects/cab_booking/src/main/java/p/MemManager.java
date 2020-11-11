@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MemManager { 
 	public ConcurrentHashMap<String, User> userMap;
-	public ConcurrentHashMap<String, String> userBooking;
+	public ConcurrentHashMap<String, ArrayList<String>> userBooking;
 	public ConcurrentHashMap<String, Ride> rideMap;
 	public ConcurrentHashMap<String, Payment> payMap;
 	public ConcurrentHashMap<String, Vehicle> driverVehicle;
