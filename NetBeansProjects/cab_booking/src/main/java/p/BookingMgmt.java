@@ -10,9 +10,10 @@ public class BookingMgmt {
 	String bookingID;
 	double cancelAmount = 100.0;
 	int farePerDistance = 10;
-	public BookingMgmt(String passengerID) {
-		this.bookingID = UUID.randomUUID().toString();
+	public BookingMgmt(String passengerID, MemManager mmap) {
+		this.bookingID = "B" + UUID.randomUUID().toString();
 		this.passengerID = passengerID;
+		mmap.userBooking.put(this.passengerID,this.bookingID);
 	}
 	public String findNearestCab(Location pLocation, String region, String vehicleType, MemManager mmap) {
 		ConcurrentMap<String, Vehicle> map = mmap.driverVehicle;
@@ -74,7 +75,7 @@ public class BookingMgmt {
 	public void endRide(Ride r, int rating, MemManager mmap, String driverID) {
 		String endTime = LocalTime.now().toString();
 		r.setStatus("Completed");
-		r.setEndTime(LocalTime.now().toString());
+		r.setEndTime(endTime);
 		r.setRating(rating);
 		mmap.rideMap.put(this.bookingID,r);
 		//set driver status as available
@@ -83,11 +84,15 @@ public class BookingMgmt {
 		mmap.userMap.put(driverID,d);
 	} 
 	public void cancelRide(String mode, MemManager mmap, String passID) {
-		this.makePayment(mode, this.cancelAmount, mmap, passID);
-		Cancellation c = new Cancellation();
+		Payment p = new Payment(mode, this.cancelAmount, this.bookingID, passID);
+		p.comments=Payment.paymentType.CANCELLATION_FEE;
+		p.processPayment();
+		mmap.payMap.put(this.bookingID, p);
+
 	}
 	public void makePayment(String mode, double amount, MemManager mmap, String passID) {
 		Payment p = new Payment(mode, amount, this.bookingID, passID);
+		p.comments=Payment.paymentType.RIDE_FEE;
 		p.processPayment();
 		mmap.payMap.put(this.bookingID, p);
 	}
