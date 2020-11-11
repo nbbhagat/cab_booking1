@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.io.Serializable;
 
@@ -26,7 +27,7 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
-	public  void serializeUBMap(ConcurrentHashMap<String, String> userBooking)
+	public  void serializeUBMap(ConcurrentHashMap<String, ArrayList<String>> userBooking)
 	{
         try
         {

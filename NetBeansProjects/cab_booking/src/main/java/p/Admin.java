@@ -3,17 +3,17 @@ package p;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Admin {
-	public void registerPassenger(MemManager mmap,String userId,String name,String pno, String pwd,Location location, Address addr,String region)
+	public void registerPassenger(MemManager mmap,String name,String pno, String pwd,Location location, Address addr,String region)
 	{
-		User p=new Passenger(userId, name, pno, pwd, location, addr,region);
+		User p=new Passenger( name, pno, pwd, location, addr,region);
         mmap.userMap.put(p.userId,p);
         System.out.println("Added details of Passenger "+p.userId);
 		
 	}
 	
-	public void registerDriver(MemManager mmap, String userId, String name, String pno, String pwd,Location location, boolean status,String region)
+	public void registerDriver(MemManager mmap, String name, String pno, String pwd,Location location, boolean status,String region)
 	{
-		User d=new Driver(userId, name, pno, pwd, location, status,region);
+		User d=new Driver( name, pno, pwd, location, status,region);
         mmap.userMap.put(d.userId,d);
         System.out.println("Added details of Driver "+d.userId);
 		
