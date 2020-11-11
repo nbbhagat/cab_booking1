@@ -9,6 +9,7 @@ public class BookingMgmt {
 	String passengerID;
 	String driverID;
 	String bookingID;
+	double cancelAmount = 100.0;
 	int farePerDistance = 10;
 	public String findNearestCab(Location pLocation, String region, String vehicleType, MemManager mmap) {
 		ConcurrentMap<String, Vehicle> map = mmap.driverVehicle;
@@ -68,7 +69,7 @@ public class BookingMgmt {
 		mmap.rideMap.put(this.bookingID,r);
 		return r;
 	}
-	public void endRide(Ride r, String rating, MemManager mmap, String driverID) {
+	public void endRide(Ride r, int rating, MemManager mmap, String driverID) {
 		String endTime = LocalTime.now().toString();
 		r.setStatus("Completed");
 		r.setEndTime(LocalTime.now().toString());
@@ -78,7 +79,13 @@ public class BookingMgmt {
 		Driver d = (Driver)mmap.userMap.get(driverID);
 		d.status = true;
 		mmap.userMap.put(driverID,d);
-
+	} 
+	public void cancelRide(String mode, MemManager mmap) {
+		this.makePayment(mode, this.cancelAmount, mmap);
 	}
-	
+	public void makePayment(String mode, double amount, MemManager mmap) {
+		Payment p = new Payment(mode, amount, this.bookingID);
+		p.processPayment();
+		mmap.payMap.put(this.bookingID, p);
+	}
 }
