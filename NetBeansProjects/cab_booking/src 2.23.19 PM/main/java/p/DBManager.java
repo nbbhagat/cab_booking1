@@ -26,6 +26,22 @@ public class DBManager{
                ioe.printStackTrace();
          }
 	}
+	public  void serializeUBMap(ConcurrentHashMap<String, String> userBooking)
+	{
+        try
+        {
+               FileOutputStream fos =
+                  new FileOutputStream("ubhashmap.ser");
+               ObjectOutputStream oos = new ObjectOutputStream(fos);
+               oos.writeObject(userBooking);
+               oos.close();
+               fos.close();
+               System.out.println("Serialized HashMap data is saved in ubhashmap.ser");
+        }catch(IOException ioe)
+         {
+               ioe.printStackTrace();
+         }
+	}
 	public  void serializeDVMap(ConcurrentHashMap<String, Vehicle> driverVehicle)
 	{
         try
@@ -94,6 +110,27 @@ public class DBManager{
 		         c.printStackTrace();
 		      }
 		      return umap;
+			}
+	public  ConcurrentHashMap<String, String> deserializeUBMap()
+	{
+		ConcurrentHashMap<String, String> ubmap = null;
+		      try
+		      {
+		         FileInputStream fis = new FileInputStream("ubhashmap.ser");
+		         ObjectInputStream ois = new ObjectInputStream(fis);
+		         ubmap = (ConcurrentHashMap) ois.readObject();
+		         System.out.println("Deserialized HashMap data" + ubmap);
+		         ois.close();
+		         fis.close();
+		      }catch(IOException ioe)
+		      {
+		         ioe.printStackTrace();
+		      }catch(ClassNotFoundException c)
+		      {
+		         System.out.println("Class not found");
+		         c.printStackTrace();
+		      }
+		      return ubmap;
 			}
 	public  ConcurrentHashMap<String, Ride> deserializeRideMap()
 	{

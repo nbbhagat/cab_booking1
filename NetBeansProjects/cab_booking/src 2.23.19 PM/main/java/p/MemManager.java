@@ -4,6 +4,7 @@ import java.util.*;
 
 public class MemManager { 
 	public ConcurrentHashMap<String, User> userMap;
+	public ConcurrentHashMap<String, String> userBooking;
 	public ConcurrentHashMap<String, Ride> rideMap;
 	public ConcurrentHashMap<String, Payment> payMap;
 	public ConcurrentHashMap<String, Vehicle> driverVehicle;
@@ -11,6 +12,10 @@ public class MemManager {
 	public void userMapInit()
 	{
 		userMap = new ConcurrentHashMap<>();
+	}
+	public void userBookingInit()
+	{
+		userBooking = new ConcurrentHashMap<>();
 	}
 	public void rideMapInit()
 	{

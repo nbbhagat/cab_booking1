@@ -12,6 +12,7 @@ public class CabApp {
 	{
 		MemManager MManager=new MemManager();
 		File uf=new File("userhashmap.ser");
+		File ubf= new File("ubhashmap.ser");
 		File dvf= new File("dvhashmap.ser");
 		File pf=new File("payhashmap.ser");
 		File rf=new File("ridehashmap.ser");
@@ -27,6 +28,19 @@ public class CabApp {
 			System.out.println("Creating user map for the first time");
 			MManager.userMapInit();
 			System.out.println(MManager.userMap);
+		}
+		if(ubf.exists())
+		{
+			System.out.println("Deserialising existing user booking map");
+			DBManager DBm = new DBManager();
+			MManager.userBooking=DBm.deserializeUBMap();
+			
+		}
+		else
+		{   		
+			System.out.println("Creating user map for the first time");
+			MManager.userMapInit();
+			System.out.println(MManager.userBooking);
 		}
 		if(dvf.exists())
 		{
@@ -71,11 +85,9 @@ public class CabApp {
 		{
 			//cab booking options with save&exit
 			Admin AObj=new Admin();
-			System.out.println("School Management System");
-			System.out.println("1. Add student details");
-			System.out.println("2. Delete student record");
-			System.out.println("3. Update student name");
-			System.out.println("4. View student record");
+			System.out.println("Cab Booking Application");
+			System.out.println("1. Register");
+			System.out.println("2. Login");
 			System.out.println("5. Save and Exit");
 			System.out.println("Enter an option - ");
 			Scanner input=new Scanner(System.in);
