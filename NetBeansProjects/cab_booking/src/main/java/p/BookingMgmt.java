@@ -85,14 +85,14 @@ public class BookingMgmt {
 	} 
 	public void cancelRide(String mode, MemManager mmap, String passID) {
 		Payment p = new Payment(mode, this.cancelAmount, this.bookingID, passID);
-		p.comments=Payment.paymentType.CANCELLATION_FEE;
+		p.setComments(Payment.paymentType.CANCELLATION_FEE);
 		p.processPayment();
 		mmap.payMap.put(this.bookingID, p);
 
 	}
 	public void makePayment(String mode, double amount, MemManager mmap, String passID) {
 		Payment p = new Payment(mode, amount, this.bookingID, passID);
-		p.comments=Payment.paymentType.RIDE_FEE;
+		p.setComments(Payment.paymentType.RIDE_FEE);
 		p.processPayment();
 		mmap.payMap.put(this.bookingID, p);
 	}

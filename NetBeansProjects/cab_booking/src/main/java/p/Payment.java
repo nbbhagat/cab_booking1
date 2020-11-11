@@ -17,7 +17,9 @@ public class Payment implements Serializable{
 	    CANCELLATION_FEE, RIDE_FEE;
 	}
 
-
+public void setComments(paymentType pt) {
+	this.comments = pt;
+}
 public Payment(String mode, Double amount, String bid,String passID)
 {
 	this.mode=mode;
