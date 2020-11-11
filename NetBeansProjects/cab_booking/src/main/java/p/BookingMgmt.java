@@ -13,7 +13,9 @@ public class BookingMgmt {
 	public BookingMgmt(String passengerID, MemManager mmap) {
 		this.bookingID = "B" + UUID.randomUUID().toString();
 		this.passengerID = passengerID;
-		mmap.userBooking.put(this.passengerID,this.bookingID);
+		ArrayList<String> al = mmap.userBooking.get(passengerID);
+		al.add(this.bookingID);
+		mmap.userBooking.put(this.passengerID,al);
 	}
 	public String findNearestCab(Location pLocation, String region, String vehicleType, MemManager mmap) {
 		ConcurrentMap<String, Vehicle> map = mmap.driverVehicle;
