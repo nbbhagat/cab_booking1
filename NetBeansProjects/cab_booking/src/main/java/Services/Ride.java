@@ -1,4 +1,5 @@
-package p;
+package services;
+import entity.Location;
 public class Ride implements java.io.Serializable{
 	String startTime;
 	String endTime;

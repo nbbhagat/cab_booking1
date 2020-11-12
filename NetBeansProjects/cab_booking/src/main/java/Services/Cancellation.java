@@ -1,4 +1,4 @@
-package p;
+package services;
 public class Cancellation {
 	String bookingID;
 	String reason;

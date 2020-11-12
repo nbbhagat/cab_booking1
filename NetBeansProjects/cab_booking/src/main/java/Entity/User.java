@@ -1,18 +1,20 @@
-package p;
-
+package entity;
 import java.util.UUID;
 import java.util.ArrayList;
+import dataStore.MemManager;
+import services.Payment;
+import services.Ride;
 
 public class User implements java.io.Serializable {
     private MemManager mManager;
 
     
-    String userId;
+    public String userId;
     String name;
     String phoneNo;
     int numRides=0;
-    String password;
-    Location location;
+    public String password;
+    public Location location;
     float avgRating=0;
     public User(){
 
@@ -69,34 +71,4 @@ public class User implements java.io.Serializable {
             else  System.out.println("No record found");
     }
 }
-class Passenger extends User{
-     public Passenger(String name, String phoneNo,String password,Location location){
-        super(name,phoneNo,password,location);
-        this.userId="P"+UUID.randomUUID().toString();
-    }
-    @Override
-    public String toString(){
-        return "name:-> "+name+", phoneNo-> "+phoneNo+", avgRating-> "+avgRating+", location-> "+location;
-    }
-}
-class Driver extends User{
-        boolean status;
-        public Driver(String name, String phoneNo,String password,Location location, boolean status,Vehicle vehicle){
-                super(name,phoneNo,password,location);
-                this.status=status;
-                this.userId="D"+UUID.randomUUID().toString();
-        }
 
-        public boolean isStatus() {
-            return status;
-        }
-
-        public void setStatus() {
-            this.status = !status;
-        }
-
-        @Override
-        public String toString(){
-            return "name:-> "+name+", phoneNo-> "+phoneNo+", avgRating-> "+avgRating+", location-> "+location;
-        }
-}

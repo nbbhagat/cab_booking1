@@ -1,11 +1,9 @@
-package Entity;
-
-import p.*;
+package entity;
 
 public class Location implements java.io.Serializable{
-    int latitude;
-    int longitude;
-    region r; 
+    public int latitude;
+    public int longitude;
+    public region r; 
     public enum region {
     	DELHI, MUMBAI, CHENNAI, BANGALORE;
     }

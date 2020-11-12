@@ -1,16 +1,24 @@
-package p;
-import Entity.*;
+package services;
+import entity.Location;
+import services.Payment;
+import services.Ride;
+import entity.Vehicle;
+import entity.Car;
+import entity.Bike;
+import entity.Auto;
+import entity.Driver;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.*;
 import java.time.*;
+import dataStore.MemManager;
 public class BookingMgmt {
         private MemManager mManager;
 	String passengerID;
 	String driverID;
 	String bookingID;
-	double cancelAmount = 100.0;
+	public double cancelAmount = 100.0;
 	
 	public BookingMgmt(String passengerID) {
                 this.mManager=MemManager.getInstance();
