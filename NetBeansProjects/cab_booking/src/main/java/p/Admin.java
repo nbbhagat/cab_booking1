@@ -3,21 +3,22 @@ package p;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Admin {
-	public void registerPassenger(MemManager mmap,String name,String pno, String pwd,Location location,String region)
+	public void registerPassenger(MemManager mmap,String name,String pno, String pwd,Location location)
 	{
-		User p=new Passenger(name, pno, pwd,location,region);
+		User p=new Passenger(name, pno, pwd,location);
         mmap.userMap.put(p.userId,p);
         System.out.println("Added details of Passenger "+p.userId);
 		
 	}
 	
-	public void registerDriver(MemManager mmap, String name, String pno, String pwd,Location location, boolean status,Vehicle vehicle,String region)
+	public void registerDriver(MemManager mmap, String name, String pno, String pwd,Location location, boolean status,Vehicle vehicle)
 	{
-		User d=new Driver(name, pno, pwd, location, status,vehicle,region);
+		User d=new Driver(name, pno, pwd, location, status,vehicle);
         mmap.userMap.put(d.userId,d);
         System.out.println("Added details of Driver "+d.userId);
 		mmap.driverVehicle.put(d.userId,vehicle);
 		System.out.println("Vehicle "+vehicle.vId+" mapped to Driver "+d.userId);
+		System.out.println(mmap.driverVehicle.get(d.userId));
 		
 	}
 	
@@ -76,7 +77,7 @@ public class Admin {
 		Dbm.serializeDVMap(mmap.driverVehicle);
 		Dbm.serializePayMap(mmap.payMap);
 		Dbm.serializeRideMap(mmap.rideMap);
-		
+		Dbm.serializeUBMap(mmap.userBooking);
 		System.out.println("Serializing map before exiting");
 		System.exit(0);
 	}

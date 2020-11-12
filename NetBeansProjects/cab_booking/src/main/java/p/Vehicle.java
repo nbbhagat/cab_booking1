@@ -1,10 +1,8 @@
 package p;
 import java.util.UUID;
-abstract public class Vehicle {
+public class Vehicle implements java.io.Serializable{
     String vId;
     //public Vegicle()
-    abstract public void setId();
-
     public String getvId() {
         return vId;
     }
@@ -18,6 +16,10 @@ class Auto extends Vehicle implements java.io.Serializable{
     public void setId(){
         vId="VA"+UUID.randomUUID().toString();
     }
+    @Override
+    public String toString() {
+    	return "VId: "+this.getvId() +" capacity: "+this.capacity +" base fare: "+this.baseFare+" factor : "+this.factor;
+    }
 }
 class Bike extends Vehicle implements java.io.Serializable{
     
@@ -27,6 +29,11 @@ class Bike extends Vehicle implements java.io.Serializable{
     public void setId(){
         vId="VB"+UUID.randomUUID().toString();
     }
+    @Override
+    public String toString() {
+    	return "VId: "+this.getvId() +" capacity: "+this.capacity +" base fare: "+this.baseFare+" factor : "+this.factor;
+    }
+
 }
 class Car extends Vehicle implements java.io.Serializable{
     
@@ -36,4 +43,9 @@ class Car extends Vehicle implements java.io.Serializable{
     public void setId(){
         vId="VC"+UUID.randomUUID().toString();
     }
+    @Override
+    public String toString() {
+    	return "VId: "+this.getvId() +" capacity: "+this.capacity +" base fare: "+this.baseFare+" factor : "+this.factor;
+    }
+
 }

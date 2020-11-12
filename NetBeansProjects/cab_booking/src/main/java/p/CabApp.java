@@ -29,7 +29,7 @@ public class CabApp {
             MManager.userBooking = DBm.deserializeUBMap();
 
         } else {
-            System.out.println("Creating user map for the first time");
+            System.out.println("Creating user booking map for the first time");
             MManager.userBookingInit();
             System.out.println(MManager.userBooking);
         }
@@ -93,13 +93,10 @@ public class CabApp {
                                     System.out.println("Enter Location - ");
                                     System.out.println("Enter your current Location:\nLatitude: ");
                                     int sLatitude = addInput.nextInt();
-                                    System.out.println("Longitude: ");
+                                    System.out.println("Longitude:");
                                     int sLongitude = addInput.nextInt();
                                     Location l = new Location(sLatitude,sLongitude);
-                                    
-                                    System.out.println("Enter region - ");
-                                    String region=addInput.next();
-                                    AObj.registerPassenger(MManager, name, pno, pwd, l,region);
+                                    AObj.registerPassenger(MManager, name, pno, pwd, l);
                                     break;
                                 }
                             case 2: //Driver Registration
@@ -112,14 +109,15 @@ public class CabApp {
                                     String pno = addInput.next();
                                     System.out.println("Enter Password - ");
                                     String pwd = addInput.next();
-                                    System.out.println("Enter Location - ");
-                                    Location l = new Location();
+                                    System.out.println("Enter Location:\nLatitude: ");
+                                    int latitude = addInput.nextInt();
+                                    System.out.println("\nLongitude:");
+                                    int longitude = addInput.nextInt();
+                                    Location l = new Location(latitude, longitude);
                                     System.out.println("Enter Status - ");
                                     Boolean status = addInput.nextBoolean();
                                     //add vehicle details
                                     //create vehicle object
-                                    System.out.println("Enter region - ");
-                                    String region=addInput.next();
                                     System.out.println("Enter the vehicle type");
                                     System.out.println("1. Auto \n 2.Bike \n 3. Car");
                                     int type=addInput.nextInt();
@@ -127,7 +125,8 @@ public class CabApp {
                                             case 1 : {
                                                 Auto auto=new Auto();
                                                 auto.setId();
-                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, auto,region);
+                                                System.out.println(auto.vId);
+                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, auto);
                                                 break;
                                             }
 
@@ -135,14 +134,14 @@ public class CabApp {
                                             {
                                                Bike bike=new Bike();
                                                 bike.setId();
-                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, bike,region);
+                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, bike);
                                                 break;
                                             }
                                             case 3 :
                                             {
                                                 Car car=new Car();
                                                 car.setId() ;
-                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, car,region);
+                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, car);
                                                 break;
                                             }
 
@@ -173,8 +172,6 @@ public class CabApp {
                                 switch (option3) {
                                     case 1:
                                         { //Book Cab
-                                            System.out.println("Enter your region:");
-                                            String region = addInput.next();
                                             System.out.println("Enter your current Location:\nLatitude: ");
                                             int sLatitude = addInput.nextInt();
                                             System.out.println("Longitude: ");
@@ -189,7 +186,7 @@ public class CabApp {
                                             BookingMgmt bm = new BookingMgmt(userId, MManager);
                                             Location source = new Location(sLatitude, sLongitude);
                                             Location dest = new Location(dLatitude, dLongitude);
-                                            String availableDriverID = bm.findNearestCab(source, region, vehicleType, MManager);
+                                            String availableDriverID = bm.findNearestCab(source, vehicleType, MManager);
                                             System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
                                             int confirmation = addInput.nextInt();
                                             switch (confirmation) { //Confirm initially

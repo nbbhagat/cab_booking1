@@ -10,17 +10,15 @@ public class User implements java.io.Serializable {
     String password;
     Location location;
     float avgRating=0;
-    String region;
     public User(){
 
     }
-    public User(String name, String phoneNo,String password,Location location,String region){
+    public User(String name, String phoneNo,String password,Location location){
         this.name=name;
         this.phoneNo=phoneNo;
         this.password=password;
         this.location=location;
-        this.region=region;
-    }
+     }
     public void setNumRides() {
         this.numRides++;
     }
@@ -44,7 +42,7 @@ public class User implements java.io.Serializable {
             {
                 for (int i = 0; i < record.size(); i++) {
                         String bookingId=record.get(i) ;
-                        Ride ride=mmap.rideMap.get(i);
+                        Ride ride=mmap.rideMap.get(bookingId);
                         System.out.println(i+1+". "+ride);
                 }
 
@@ -58,7 +56,7 @@ public class User implements java.io.Serializable {
             {
                 for (int i = 0; i < record.size(); i++) {
                         String bookingId=record.get(i) ;
-                        Payment payment =mmap.payMap.get(i);
+                        Payment payment =mmap.payMap.get(bookingId);
                         System.out.println(i+1+". "+payment);
                 }
 
@@ -67,21 +65,19 @@ public class User implements java.io.Serializable {
     }
 }
 class Passenger extends User{
-    Address address;
-    public Passenger(String name, String phoneNo,String password,Location location,String region){
-        super(name,phoneNo,password,location,region);
-        this.address=address;
+     public Passenger(String name, String phoneNo,String password,Location location){
+        super(name,phoneNo,password,location);
         this.userId="P"+UUID.randomUUID().toString();
     }
     @Override
     public String toString(){
-        return "name:-> "+name+", phoneNo-> "+phoneNo+", avgRating-> "+avgRating+", location-> "+location+" "+address;
+        return "name:-> "+name+", phoneNo-> "+phoneNo+", avgRating-> "+avgRating+", location-> "+location;
     }
 }
 class Driver extends User{
         boolean status;
-        public Driver(String name, String phoneNo,String password,Location location, boolean status,Vehicle vehicle,String region){
-                super(name,phoneNo,password,location,region);
+        public Driver(String name, String phoneNo,String password,Location location, boolean status,Vehicle vehicle){
+                super(name,phoneNo,password,location);
                 this.status=status;
                 this.userId="D"+UUID.randomUUID().toString();
         }

@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.io.Serializable;
 
 
@@ -51,7 +53,13 @@ public class DBManager{
                   new FileOutputStream("dvhashmap.ser");
                ObjectOutputStream oos = new ObjectOutputStream(fos);
                oos.writeObject(driverVehicle);
-               oos.close();
+               System.out.println("Testing in DBManager");
+	       		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr1 = driverVehicle.entrySet().iterator(); 
+	       		while(itr1.hasNext()) {
+	       			ConcurrentHashMap.Entry<String, Vehicle> entry1 = itr1.next(); 
+	       			System.out.println(entry1.getValue());			
+	       		}               
+	       		oos.close();
                fos.close();
                System.out.println("Serialized HashMap data is saved in dvhashmap.ser");
         }catch(IOException ioe)
@@ -181,7 +189,7 @@ public class DBManager{
 		ConcurrentHashMap<String, Vehicle> dvmap = null;
 		      try
 		      {
-		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
+		         FileInputStream fis = new FileInputStream("dvhashmap.ser");
 		         ObjectInputStream ois = new ObjectInputStream(fis);
 		         dvmap = (ConcurrentHashMap) ois.readObject();
 		         System.out.println("Deserialized HashMap data" + dvmap);

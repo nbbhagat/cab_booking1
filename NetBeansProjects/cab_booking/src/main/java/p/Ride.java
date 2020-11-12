@@ -27,4 +27,8 @@ public class Ride implements java.io.Serializable{
 	public void setRating(int  rating) {
 		this.rating = rating;
 	}
+	@Override
+	public String toString() {
+		return ("Start time = "+this.startTime+", End time = "+this.endTime+", rating = "+rating + ", status = "+this.status+", source= "+source+", dest="+this.dest+", date= "+this.date);
+	}
 }

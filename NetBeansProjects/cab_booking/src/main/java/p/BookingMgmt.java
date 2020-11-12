@@ -14,34 +14,55 @@ public class BookingMgmt {
             
 		this.bookingID = "B" + UUID.randomUUID().toString();
 		this.passengerID = passengerID;
-		ArrayList<String> al = mmap.userBooking.get(this.passengerID);
-		al.add(this.bookingID);
-		mmap.userBooking.put(this.passengerID,al);
+		if(mmap.userBooking.get(this.passengerID)!=null)
+		{
+			ArrayList<String> al = mmap.userBooking.get(this.passengerID);
+			al.add(this.bookingID);
+			mmap.userBooking.put(this.passengerID,al);
+		}
+		else
+		{
+			ArrayList<String> al = new ArrayList<String>();
+			al.add(this.bookingID);
+			mmap.userBooking.put(this.passengerID,al);
+		}		
+
 	}
-	public String findNearestCab(Location pLocation, String region, char vehicleType, MemManager mmap) {
+	public String findNearestCab(Location pLocation, char vehicleType, MemManager mmap) {
 		ConcurrentMap<String, Vehicle> map = mmap.driverVehicle;
+		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr1 = map.entrySet().iterator(); 
+		while(itr1.hasNext()) {
+			ConcurrentHashMap.Entry<String, Vehicle> entry1 = itr1.next(); 
+			System.out.println(entry1.getValue().getvId().charAt(1)+" "+vehicleType);		
+			System.out.println(mmap.userMap.get(entry1.getKey()));
+		}
+		System.out.println("All fine till now");
 		ConcurrentMap<String, Vehicle> availableDrivers = 
 		    map.entrySet()
 		       .stream()
-		       .filter(e -> e.getValue().vId.charAt(1)== vehicleType)
+		       .filter(e -> e.getValue().getvId().charAt(1)== vehicleType)
 		       .filter(e -> ((Driver)mmap.userMap.get(e.getKey())).status == true)
-		       .filter(e -> ((Driver)mmap.userMap.get(e.getKey())).region == region)
+		       .filter(e -> ((Driver)mmap.userMap.get(e.getKey())).location.r.equals(pLocation.r))
 		       .collect(Collectors.toConcurrentMap(Map.Entry::getKey, Map.Entry::getValue));
-		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr = availableDrivers.entrySet().iterator(); 
-		ConcurrentHashMap.Entry<String, Vehicle> entry = itr.next(); 
-		Location dLocation = mmap.userMap.get(entry.getKey()).location;
-		double minDistance = distanceBetweenLocations(pLocation, dLocation);
-		String closestDriver = entry.getKey();
-		double distance = 0.0;
-		while (itr.hasNext()) { 
-			entry = itr.next(); 
-			dLocation = mmap.userMap.get(entry.getKey()).location;
-			distance = distanceBetweenLocations(pLocation, dLocation);
-			if(distance < minDistance) {
-				minDistance = distance;
-				closestDriver = entry.getKey();
-			}
-		} 		
+		System.out.println(availableDrivers);
+		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr = availableDrivers.entrySet().iterator();
+		String closestDriver="lol";
+		if(itr.hasNext()) {
+			ConcurrentHashMap.Entry<String, Vehicle> entry = itr.next(); 
+			Location dLocation = mmap.userMap.get(entry.getKey()).location;
+			double minDistance = distanceBetweenLocations(pLocation, dLocation);
+			closestDriver = entry.getKey();
+			double distance = 0.0;
+			while (itr.hasNext()) { 
+				entry = itr.next(); 
+				dLocation = mmap.userMap.get(entry.getKey()).location;
+				distance = distanceBetweenLocations(pLocation, dLocation);
+				if(distance < minDistance) {
+					minDistance = distance;
+					closestDriver = entry.getKey();
+				}
+			} 	
+		}
 		return closestDriver;
 	}
 	public double calculateFare(Location source, Location dest, Vehicle v) {
