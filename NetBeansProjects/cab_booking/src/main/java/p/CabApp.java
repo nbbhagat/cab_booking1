@@ -234,12 +234,12 @@ public class CabApp {
                                                                     switch (option4) {
                                                                         case 1:
                                                                             { //cash
-                                                                                bm.cancelRide("cash", MManager, userId);
+                                                                                bm.cancelRide("Cash", MManager, userId);
                                                                                 break;
                                                                             }
                                                                         case 2:
                                                                             { //e-wallet
-                                                                                bm.cancelRide("ewallet", MManager, userId);
+                                                                                bm.cancelRide("E-wallet", MManager, userId);
                                                                                 
                                                                                 break;
                                                                             }
@@ -251,7 +251,7 @@ public class CabApp {
                                                     } //confirmation case 1
                                                 case 2:
                                                     {
-                                                        System.out.println("u have cancelled your booking");
+                                                        System.out.println("You have cancelled your booking");
                                                         
                                                         break;
                                                     }
@@ -301,7 +301,7 @@ public class CabApp {
 
                                         case 2:
                                             {
-                                                System.out.println("enter your current location");
+                                                System.out.println("Enter your current location");
                                                 int latitude = input.nextInt();
                                                 int longitude = input.nextInt();
                                                 Location location = new Location(latitude, longitude);
