@@ -181,12 +181,15 @@ public class CabApp {
                                                                     switch (option4) {
                                                                         case 1:
                                                                             { //cash
+
                                                                                 bm.cancelRide("Cash",  userId);
                                                                                 break;
                                                                             }
                                                                         case 2:
                                                                             { //e-wallet
+
                                                                                 bm.cancelRide("E-wallet",  userId);
+
                                                                                 
                                                                                 break;
                                                                             }
@@ -198,7 +201,9 @@ public class CabApp {
                                                     } //confirmation case 1
                                                 case 2:
                                                     {
-                                                        System.out.println("U have cancelled your booking");
+
+                                                        System.out.println("You have cancelled your booking");
+
                                                         
                                                         break;
                                                     }
