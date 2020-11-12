@@ -1,8 +1,12 @@
 package p;
+
 import java.util.UUID;
 import java.util.ArrayList;
 
 public class User implements java.io.Serializable {
+    private MemManager mManager;
+
+    
     String userId;
     String name;
     String phoneNo;
@@ -18,6 +22,7 @@ public class User implements java.io.Serializable {
         this.phoneNo=phoneNo;
         this.password=password;
         this.location=location;
+        this.mManager=MemManager.getInstance();
      }
     public void setNumRides() {
         this.numRides++;
@@ -36,13 +41,13 @@ public class User implements java.io.Serializable {
         this.avgRating=avgRating+(rating-avgRating)/(numRides);
     }
     
-    public  void viewRideHistory(MemManager mmap,String userId){
-        ArrayList<String> record= mmap.userBooking.get(userId);
+    public  void viewRideHistory(String userId){
+        ArrayList<String> record= mManager.userBooking.get(userId);
             if(record!=null)
             {
                 for (int i = 0; i < record.size(); i++) {
                         String bookingId=record.get(i) ;
-                        Ride ride=mmap.rideMap.get(bookingId);
+                        Ride ride=mManager.rideMap.get(bookingId);
                         System.out.println(i+1+". "+ride);
                 }
 
@@ -50,13 +55,13 @@ public class User implements java.io.Serializable {
             else  System.out.println("No record found");
     }
 
-    public  void viewPaymentHistory(MemManager mmap,String userId){
-            ArrayList<String> record= mmap.userBooking.get(userId);
+    public  void viewPaymentHistory(String userId){
+            ArrayList<String> record= mManager.userBooking.get(userId);
             if(record!=null)
             {
                 for (int i = 0; i < record.size(); i++) {
                         String bookingId=record.get(i) ;
-                        Payment payment =mmap.payMap.get(bookingId);
+                        Payment payment =mManager.payMap.get(bookingId);
                         System.out.println(i+1+". "+payment);
                 }
 

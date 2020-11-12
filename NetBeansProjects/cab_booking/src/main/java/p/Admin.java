@@ -3,31 +3,35 @@ package p;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Admin {
-	public void registerPassenger(MemManager mmap,String name,String pno, String pwd,Location location)
+    private MemManager mManager;
+        public Admin(){
+            this.mManager=MemManager.getInstance();
+        }
+	public void registerPassenger(String name,String pno, String pwd,Location location)
 	{
 		User p=new Passenger(name, pno, pwd,location);
-        mmap.userMap.put(p.userId,p);
+        mManager.userMap.put(p.userId,p);
         System.out.println("Added details of Passenger "+p.userId);
 		
 	}
 	
-	public void registerDriver(MemManager mmap, String name, String pno, String pwd,Location location, boolean status,Vehicle vehicle)
+	public void registerDriver( String name, String pno, String pwd,Location location, boolean status,Vehicle vehicle)
 	{
 		User d=new Driver(name, pno, pwd, location, status,vehicle);
-        mmap.userMap.put(d.userId,d);
+        mManager.userMap.put(d.userId,d);
         System.out.println("Added details of Driver "+d.userId);
-		mmap.driverVehicle.put(d.userId,vehicle);
+		mManager.driverVehicle.put(d.userId,vehicle);
 		System.out.println("Vehicle "+vehicle.vId+" mapped to Driver "+d.userId);
-		System.out.println(mmap.driverVehicle.get(d.userId));
+		System.out.println(mManager.driverVehicle.get(d.userId));
 		
 	}
 	
-	public void deletePassenger(MemManager mmap, String userId)
+	public void deletePassenger( String userId)
 	{
-		User p=mmap.userMap.get(userId);
+		User p=mManager.userMap.get(userId);
 		if(p!=null)
 		{
-			mmap.userMap.remove(userId);
+			mManager.userMap.remove(userId);
 			System.out.println("Deleted details of user "+userId);
 		}
 		else
@@ -37,12 +41,12 @@ public class Admin {
 
 	}
 	
-	public void deleteDriver(MemManager mmap, String userId)
+	public void deleteDriver( String userId)
 	{
-		User d=mmap.userMap.get(userId);
+		User d=mManager.userMap.get(userId);
 		if(d!=null)
 		{
-			mmap.userMap.remove(userId);
+			mManager.userMap.remove(userId);
 			System.out.println("Deleted details of user "+userId);
 		}
 		else
@@ -57,9 +61,9 @@ public class Admin {
 //
 //	}
 	
-	public void viewUserRecord(MemManager mmap,String userId)
+	public void viewUserRecord(String userId)
 	{
-		User u=mmap.userMap.get(userId);
+		User u=mManager.userMap.get(userId);
 		if(u!=null)
 		{
 			System.out.println(u);
@@ -70,14 +74,14 @@ public class Admin {
 		}
 		
 	}
-	public void saveAndExit(MemManager mmap)
+	public void saveAndExit()
 	{
 		DBManager Dbm = new DBManager();
-		Dbm.serializeUserMap(mmap.userMap);
-		Dbm.serializeDVMap(mmap.driverVehicle);
-		Dbm.serializePayMap(mmap.payMap);
-		Dbm.serializeRideMap(mmap.rideMap);
-		Dbm.serializeUBMap(mmap.userBooking);
+		Dbm.serializeUserMap(mManager.userMap);
+		Dbm.serializeDVMap(mManager.driverVehicle);
+		Dbm.serializePayMap(mManager.payMap);
+		Dbm.serializeRideMap(mManager.rideMap);
+		Dbm.serializeUBMap(mManager.userBooking);
 		System.out.println("Serializing map before exiting");
 		System.exit(0);
 	}

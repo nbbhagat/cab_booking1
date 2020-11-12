@@ -1,6 +1,7 @@
 package p;
 import java.util.UUID;
 public class Vehicle implements java.io.Serializable{
+    
     String vId;
     //public Vegicle()
     public String getvId() {

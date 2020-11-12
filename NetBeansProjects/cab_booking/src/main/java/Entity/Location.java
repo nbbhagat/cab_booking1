@@ -1,4 +1,7 @@
-package p;
+package Entity;
+
+import p.*;
+
 public class Location implements java.io.Serializable{
     int latitude;
     int longitude;

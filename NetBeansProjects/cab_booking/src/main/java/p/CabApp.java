@@ -7,62 +7,8 @@ import java.util.Scanner;
 
 public class CabApp {
     public static void main(String args[]) {
-        MemManager MManager = new MemManager();
-        File uf = new File("userhashmap.ser");
-        File ubf = new File("ubhashmap.ser");
-        File dvf = new File("dvhashmap.ser");
-        File pf = new File("payhashmap.ser");
-        File rf = new File("ridehashmap.ser");
-        if (uf.exists()) {
-            System.out.println("Deserialising existing user map");
-            DBManager DBm = new DBManager();
-            MManager.userMap = DBm.deserializeUserMap();
-
-        } else {
-            System.out.println("Creating user map for the first time");
-            MManager.userMapInit();
-            System.out.println(MManager.userMap);
-        }
-        if (ubf.exists()) {
-            System.out.println("Deserialising existing user booking map");
-            DBManager DBm = new DBManager();
-            MManager.userBooking = DBm.deserializeUBMap();
-
-        } else {
-            System.out.println("Creating user booking map for the first time");
-            MManager.userBookingInit();
-            System.out.println(MManager.userBooking);
-        }
-        if (dvf.exists()) {
-            System.out.println("Deserialising existing dv map");
-            DBManager DBm = new DBManager();
-            MManager.driverVehicle = DBm.deserializeDVMap();
-
-        } else {
-            System.out.println("Creating dv map for the first time");
-            MManager.dvMapInit();
-            System.out.println(MManager.driverVehicle);
-        }
-        if (pf.exists()) {
-            System.out.println("Deserialising existing pay map");
-            DBManager DBm = new DBManager();
-            MManager.payMap = DBm.deserializePayMap();
-
-        } else {
-            System.out.println("Creating pay map for the first time");
-            MManager.payMapInit();
-            System.out.println(MManager.payMap);
-        }
-        if (rf.exists()) {
-            System.out.println("Deserialising existing ride map");
-            DBManager DBm = new DBManager();
-            MManager.rideMap = DBm.deserializeRideMap();
-
-        } else {
-            System.out.println("Creating ride map for the first time");
-            MManager.rideMapInit();
-            System.out.println(MManager.rideMap);
-        }
+        MemManager MManager = MemManager.getInstance();
+        
         while (true) {
             //cab booking options with save&exit
             Admin AObj = new Admin();
@@ -96,7 +42,7 @@ public class CabApp {
                                     System.out.println("Longitude:");
                                     int sLongitude = addInput.nextInt();
                                     Location l = new Location(sLatitude,sLongitude);
-                                    AObj.registerPassenger(MManager, name, pno, pwd, l);
+                                    AObj.registerPassenger( name, pno, pwd, l);
                                     break;
                                 }
                             case 2: //Driver Registration
@@ -126,7 +72,7 @@ public class CabApp {
                                                 Auto auto=new Auto();
                                                 auto.setId();
                                                 System.out.println(auto.vId);
-                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, auto);
+                                                AObj.registerDriver( name, pno, pwd, l, status, auto);
                                                 break;
                                             }
 
@@ -134,14 +80,14 @@ public class CabApp {
                                             {
                                                Bike bike=new Bike();
                                                 bike.setId();
-                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, bike);
+                                                AObj.registerDriver( name, pno, pwd, l, status, bike);
                                                 break;
                                             }
                                             case 3 :
                                             {
                                                 Car car=new Car();
                                                 car.setId() ;
-                                                AObj.registerDriver(MManager, name, pno, pwd, l, status, car);
+                                                AObj.registerDriver( name, pno, pwd, l, status, car);
                                                 break;
                                             }
 
@@ -162,6 +108,7 @@ public class CabApp {
                         System.out.println("1. Enter UserId and passwprd");
                         String userId=addInput.next();
                         String userPass=addInput.next();
+                        System.out.println(MManager.userMap);
                         User u=MManager.userMap.get(userId);
                         if(userId.charAt(0)=='P'&&u.password.equals(userPass)){
                              System.out.println("1. Book Cab");
@@ -183,10 +130,10 @@ public class CabApp {
                                             System.out.println("Longitude: ");
                                             int dLongitude = addInput.nextInt();
                                             System.out.println("Searching for cabs...");
-                                            BookingMgmt bm = new BookingMgmt(userId, MManager);
+                                            BookingMgmt bm = new BookingMgmt(userId);
                                             Location source = new Location(sLatitude, sLongitude);
                                             Location dest = new Location(dLatitude, dLongitude);
-                                            String availableDriverID = bm.findNearestCab(source, vehicleType, MManager);
+                                            String availableDriverID = bm.findNearestCab(source, vehicleType);
                                             System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
                                             int confirmation = addInput.nextInt();
                                             switch (confirmation) { //Confirm initially
@@ -199,7 +146,7 @@ public class CabApp {
                                                             case 1:
                                                                 { //Confirm ride start
                                                                     System.out.println("Ride has started!");
-                                                                    Ride r = bm.startRide(source, dest, MManager, availableDriverID);
+                                                                    Ride r = bm.startRide(source, dest,  availableDriverID);
                                                                     System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
                                                                     String arrived = addInput.next();
                                                                     System.out.println("You have arrived at your destination! Please rate your ride (1-5):");
@@ -207,19 +154,19 @@ public class CabApp {
                                                                     
                                                                     
                                                                     double amount = bm.calculateFare(source, dest,MManager.driverVehicle.get(availableDriverID) );
-                                                                    bm.endRide(r, rating, MManager, availableDriverID);
+                                                                    bm.endRide(r, rating,  availableDriverID);
                                                                     System.out.println("Please select your mode of payment");
                                                                     System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
                                                                     int option4 = addInput.nextInt();
                                                                     switch (option4) {
                                                                         case 1:
                                                                             { //Cash
-                                                                                bm.makePayment("cash", amount, MManager, userId);
+                                                                                bm.makePayment("cash", amount,  userId);
                                                                                 break;
                                                                             }
                                                                         case 2:
                                                                             { //E-Wallet
-                                                                                bm.makePayment("ewallet", amount, MManager, userId);
+                                                                                bm.makePayment("ewallet", amount, userId);
                                                                                 break;
                                                                             }
                                                                     }
@@ -234,12 +181,12 @@ public class CabApp {
                                                                     switch (option4) {
                                                                         case 1:
                                                                             { //cash
-                                                                                bm.cancelRide("cash", MManager, userId);
+                                                                                bm.cancelRide("cash",  userId);
                                                                                 break;
                                                                             }
                                                                         case 2:
                                                                             { //e-wallet
-                                                                                bm.cancelRide("ewallet", MManager, userId);
+                                                                                bm.cancelRide("ewallet",  userId);
                                                                                 
                                                                                 break;
                                                                             }
@@ -260,12 +207,12 @@ public class CabApp {
                                         }
                                     case 2:
                                         {
-                                            u.viewRideHistory(MManager, userId);
+                                            u.viewRideHistory( userId);
                                             break;
                                         }
                                     case 3:
                                         {
-                                            u.viewPaymentHistory(MManager, userId);
+                                            u.viewPaymentHistory( userId);
                                             break;
                                         }
                                 }
@@ -280,7 +227,7 @@ public class CabApp {
                                     
                                     Scanner input2 = new Scanner(System.in);
                                     int option_1 = input2.nextInt();
-                                    MemManager mmap;
+                                    
                                     //User d = MManager.userMap.get(userId);
                                     switch (option_1) {
                                         case 1:
@@ -312,7 +259,7 @@ public class CabApp {
                                             }
                                         case 3:
                                             {
-                                                u.viewRideHistory(MManager, userId);
+                                                u.viewRideHistory( userId);
                                                 break;
                                             }
                                     }
@@ -326,7 +273,7 @@ public class CabApp {
                     
             case 3:
                 {
-                    AObj.saveAndExit(MManager);
+                    AObj.saveAndExit();
                     break;
                 }
 
