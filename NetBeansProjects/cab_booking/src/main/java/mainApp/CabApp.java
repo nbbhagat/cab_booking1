@@ -1,4 +1,5 @@
 package mainApp;
+import mainApp.Admin;
 import entity.Location;
 import dataStore.MemManager;
 import services.BookingMgmt;
@@ -8,8 +9,6 @@ import entity.Bike;
 import entity.Auto;
 import entity.Driver;
 import entity.User;
-import java.io.File;
-import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -56,7 +55,7 @@ public class CabApp {
                             case 2: //Driver Registration
                                 {
 
-                                    Scanner addInput1 = new Scanner(System.in);
+//                                    Scanner addInput1 = new Scanner(System.in);
                                     System.out.println("Enter Name - ");
                                     String name = addInput.next();
                                     System.out.println("Enter Phone Number - ");
@@ -79,7 +78,7 @@ public class CabApp {
                                             case 1 : {
                                                 Auto auto=new Auto();
                                                 auto.setId();
-                                                System.out.println(auto.vId);
+//                                                System.out.println(auto.vId);
                                                 AObj.registerDriver( name, pno, pwd, l, status, auto);
                                                 break;
                                             }
@@ -100,9 +99,9 @@ public class CabApp {
                                             }
 
                                         }
-                                    
-                                    
-                                    
+
+
+
                                     break;
                                 }
                         }
@@ -111,9 +110,9 @@ public class CabApp {
                     }
                 case 2: //Login
                     {
-                        
+
                         Scanner addInput = new Scanner(System.in);
-                        System.out.println("1. Enter UserId and passwprd");
+                        System.out.println("1. Enter UserId and password");
                         String userId=addInput.next();
                         String userPass=addInput.next();
                         System.out.println(MManager.userMap);
@@ -159,8 +158,8 @@ public class CabApp {
                                                                     String arrived = addInput.next();
                                                                     System.out.println("You have arrived at your destination! Please rate your ride (1-5):");
                                                                     int rating = addInput.nextInt();
-                                                                    
-                                                                    
+
+
                                                                     double amount = bm.calculateFare(source, dest,MManager.driverVehicle.get(availableDriverID) );
                                                                     bm.endRide(r, rating,  availableDriverID);
                                                                     System.out.println("Please select your mode of payment");
@@ -174,7 +173,7 @@ public class CabApp {
                                                                             }
                                                                         case 2:
                                                                             { //E-Wallet
-                                                                                bm.makePayment("ewallet", amount, userId);
+                                                                                bm.makePayment("e-wallet", amount, userId);
                                                                                 break;
                                                                             }
                                                                     }
@@ -198,7 +197,7 @@ public class CabApp {
 
                                                                                 bm.cancelRide("E-wallet",  userId);
 
-                                                                                
+
                                                                                 break;
                                                                             }
                                                                     }
@@ -212,7 +211,7 @@ public class CabApp {
 
                                                         System.out.println("You have cancelled your booking");
 
-                                                        
+
                                                         break;
                                                     }
                                             }
@@ -231,16 +230,16 @@ public class CabApp {
                                 }
                                 break;
                             }
-                    
+
                         else if(userId.charAt(0)=='D'&&u.password.equals(userPass)){
                                     System.out.println("Enter the number according your option");
                                     System.out.println("1. Set status");
                                     System.out.println("2. Update current location");
                                     System.out.println("3. Show ride history");
-                                    
+
                                     Scanner input2 = new Scanner(System.in);
                                     int option_1 = input2.nextInt();
-                                    
+
                                     //User d = MManager.userMap.get(userId);
                                     switch (option_1) {
                                         case 1:
@@ -282,8 +281,8 @@ public class CabApp {
                                             }
                         break;
                         }
-                
-                    
+
+
             case 3:
                 {
                     AObj.saveAndExit();
