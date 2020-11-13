@@ -2,6 +2,7 @@ package entity;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import enums.region;
 
 @Getter 
 @Setter
@@ -9,10 +10,6 @@ public class Location implements java.io.Serializable{
     int latitude;
     int longitude;
     region r; 
-    
-    public enum region {
-    	DELHI, MUMBAI, CHENNAI, BANGALORE;
-    }
     public Location(){
         
     }
