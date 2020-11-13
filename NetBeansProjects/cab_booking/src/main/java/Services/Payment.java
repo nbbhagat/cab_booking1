@@ -1,4 +1,5 @@
 package services;
+import enums.paymentType;
 
 import java.io.Serializable;
 import java.time.LocalDateTime; 
@@ -13,9 +14,6 @@ public class Payment implements Serializable{
 	String PaymentID;
 	String passID;
 	paymentType comments;
-	public enum paymentType {
-	    CANCELLATION_FEE, RIDE_FEE;
-	}
 
 public void setComments(paymentType pt) {
 	this.comments = pt;

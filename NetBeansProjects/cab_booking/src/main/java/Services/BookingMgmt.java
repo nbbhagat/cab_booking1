@@ -1,4 +1,5 @@
 package services;
+import enums.paymentType;
 import entity.Location;
 import services.Payment;
 import services.Ride;
@@ -143,14 +144,14 @@ public class BookingMgmt {
 	} 
 	public void cancelRide(String mode,  String passID) {
 		Payment p = new Payment(mode, this.cancelAmount, this.bookingID, passID);
-		p.setComments(Payment.paymentType.CANCELLATION_FEE);
+		p.setComments(paymentType.CANCELLATION_FEE);
 		p.processPayment();
 		mManager.payMap.put(this.bookingID, p);
 
 	}
 	public void makePayment(String mode, double amount,  String passID) {
 		Payment p = new Payment(mode, amount, this.bookingID, passID);
-		p.setComments(Payment.paymentType.RIDE_FEE);
+		p.setComments(paymentType.RIDE_FEE);
 		p.processPayment();
 		mManager.payMap.put(this.bookingID, p);
 	}
