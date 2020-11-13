@@ -14,6 +14,7 @@ public class LoginPassenger {
     }
     public void doFun(User u,Admin AObj){
             String userId=u.getUserId();
+            BookingMgmt bm = new BookingMgmt();
             Scanner addInput = new Scanner(System.in);
                 boolean login = true;
                 while (login) {
@@ -37,7 +38,7 @@ public class LoginPassenger {
                             System.out.println("Longitude: ");
                             int dLongitude = addInput.nextInt();
                             System.out.println("Searching for cabs...");
-                            BookingMgmt bm = new BookingMgmt(userId);
+                            bm.createNewBooking(userId);
                             Location source = new Location(sLatitude, sLongitude);
                             Location dest = new Location(dLatitude, dLongitude);
                             String availableDriverID = bm.findNearestCab(source, vehicleType);

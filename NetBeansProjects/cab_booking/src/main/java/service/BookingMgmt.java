@@ -21,9 +21,11 @@ public class BookingMgmt {
 	String bookingID;
 	public double cancelAmount = 100.0;
 	
-	public BookingMgmt(String passengerID) {
-                this.mManager=MemManager.getInstance();
-		this.bookingID = "B" + UUID.randomUUID().toString();
+	public BookingMgmt() {
+                this.mManager=MemManager.getInstance();		
+	}
+        public void createNewBooking(String passengerID) {
+                this.bookingID = "B" + UUID.randomUUID().toString();
 		this.passengerID = passengerID;
 		if(mManager.userBooking.get(this.passengerID)!=null)
 		{
@@ -35,8 +37,8 @@ public class BookingMgmt {
 			al.add(this.bookingID);
 			mManager.userBooking.put(this.passengerID,al);
 		}		
-
-	}
+            
+        }
 	public String findNearestCab(Location pLocation, char vehicleType) {
 		ConcurrentMap<String, Vehicle> map = mManager.driverVehicle;
 		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr1 = map.entrySet().iterator(); 
