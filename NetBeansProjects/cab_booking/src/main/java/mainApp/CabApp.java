@@ -39,38 +39,144 @@ public class CabApp {
                                     Scanner addInput1 = new Scanner(System.in);
                                     System.out.println("Enter Name - ");
                                     String name = addInput.next();
-                                    System.out.println("Enter Phone Number - ");
-                                    String pno = addInput.next();
-                                    System.out.println("Enter Password - ");
-                                    String pwd = addInput.next();
-                                    System.out.println("Enter Location - ");
-                                    System.out.println("Enter your current Location:\nLatitude: ");
-                                    int sLatitude = addInput.nextInt();
-                                    System.out.println("Longitude:");
-                                    int sLongitude = addInput.nextInt();
+                                    Scanner sc = new Scanner(System.in);
+                                    String pno;
+                                    boolean flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid phone number");
+                                        }
+                                        System.out.println("Enter 10 digit Phone Number - ");
+                                        while (!sc.hasNext()) {
+                                            System.out.println("That's not a valid number!");
+                                            sc.next(); // this is important!
+                                        }
+                                        pno = sc.next();
+                                        flag=false;
+                                    } while (pno.length() != 10);
+
+                                    String pwd;
+                                    flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid password");
+                                        }
+                                        System.out.println("Enter Password - (minimum 8 characters)");
+                                        while (!sc.hasNext()) {
+                                            System.out.println("That's not a valid password!");
+                                            sc.next(); // this is important!
+                                        }
+                                        pwd = sc.next();
+                                    } while (pwd.length() < 8);
+
+                                    int sLatitude;
+                                    flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid coordinate");
+                                        }
+                                        System.out.println("Enter your current Location:\nLatitude: (1-100)");
+                                        while (!sc.hasNextInt()) {
+                                            System.out.println("That's not a valid location!");
+                                            sc.next(); // this is important!
+                                        }
+                                        sLatitude = sc.nextInt();
+                                    } while (sLatitude<=100&&sLatitude>=0);
+
+
+                                    int sLongitude;
+                                    flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid coordinate");
+                                        }
+                                        System.out.println("\nLongitude: (1-100)");
+                                        while (!sc.hasNextInt()) {
+                                            System.out.println("That's not a valid location!");
+                                            sc.next(); // this is important!
+                                        }
+                                        sLongitude = sc.nextInt();
+                                    } while (sLongitude<=100&&sLongitude>=0);
+
                                     Location l = new Location(sLatitude,sLongitude);
                                     AObj.registerPassenger( name, pno, pwd, l);
                                     break;
                                 }
                             case 2: //Driver Registration
                                 {
-
 //                                    Scanner addInput1 = new Scanner(System.in);
                                     System.out.println("Enter Name - ");
                                     String name = addInput.next();
-                                    System.out.println("Enter Phone Number - ");
-                                    String pno = addInput.next();
-                                    System.out.println("Enter Password - ");
-                                    String pwd = addInput.next();
-                                    System.out.println("Enter Location:\nLatitude: ");
-                                    int latitude = addInput.nextInt();
-                                    System.out.println("\nLongitude:");
-                                    int longitude = addInput.nextInt();
-                                    Location l = new Location(latitude, longitude);
+                                    Scanner sc = new Scanner(System.in);
+                                    String pno;
+                                    boolean flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid phone number");
+                                        }
+                                        System.out.println("Enter 10 digit Phone Number - ");
+                                        while (!sc.hasNext()) {
+                                            System.out.println("That's not a valid number!");
+                                            sc.next(); // this is important!
+                                        }
+                                        pno = sc.next();
+                                        flag=false;
+                                    } while (pno.length() != 10);
+
+                                    String pwd;
+                                    flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid password");
+                                        }
+                                        System.out.println("Enter Password - (minimum 8 characters)");
+                                        while (!sc.hasNext()) {
+                                            System.out.println("That's not a valid password!");
+                                            sc.next(); // this is important!
+                                        }
+                                        pwd = sc.next();
+                                    } while (pwd.length() < 8);
+
+                                    int Latitude;
+                                    flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid coordinate");
+                                        }
+                                        System.out.println("Enter your current Location:\nLatitude: (1-100)");
+                                        while (!sc.hasNextInt()) {
+                                            System.out.println("That's not a valid location!");
+                                            sc.next(); // this is important!
+                                        }
+                                        Latitude = sc.nextInt();
+                                    } while (Latitude<=100&&Latitude>=0);
+
+
+                                    int Longitude;
+                                    flag=true;
+                                    do {
+                                        if(flag==false)
+                                        {
+                                            System.out.println("Invalid coordinate");
+                                        }
+                                        System.out.println("\nLongitude: (1-100)");
+                                        while (!sc.hasNextInt()) {
+                                            System.out.println("That's not a valid location!");
+                                            sc.next(); // this is important!
+                                        }
+                                        Longitude = sc.nextInt();
+                                    } while (Longitude<=100&&Longitude>=0);
+
+                                    Location l = new Location(Latitude, Longitude);
                                     System.out.println("Enter Status - ");
                                     Boolean status = addInput.nextBoolean();
-                                    //add vehicle details
-                                    //create vehicle object
                                     System.out.println("Enter the vehicle type");
                                     System.out.println("1. Auto \n 2.Bike \n 3. Car");
                                     int type=addInput.nextInt();
@@ -99,9 +205,6 @@ public class CabApp {
                                             }
 
                                         }
-
-
-
                                     break;
                                 }
                         }
