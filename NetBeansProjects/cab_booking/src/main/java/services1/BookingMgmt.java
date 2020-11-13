@@ -1,11 +1,14 @@
+
 package services1;
 import entity1.*;
-import java.util.concurrent.ConcurrentHashMap;
+import enums.paymentType;
+
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.*;
 import java.time.*;
 import dataStore.MemManager;
+import java.util.concurrent.ConcurrentHashMap;
 public class BookingMgmt {
         private MemManager mManager;
 	String passengerID;
@@ -127,14 +130,14 @@ public class BookingMgmt {
 	} 
 	public void cancelRide(String mode,  String passID) {
 		Payment p = new Payment(mode, this.cancelAmount, this.bookingID, passID);
-		p.setComments(Payment.paymentType.CANCELLATION_FEE);
+		p.setComments(paymentType.CANCELLATION_FEE);
 		p.processPayment();
 		mManager.payMap.put(this.bookingID, p);
 
 	}
 	public void makePayment(String mode, double amount,  String passID) {
 		Payment p = new Payment(mode, amount, this.bookingID, passID);
-		p.setComments(Payment.paymentType.RIDE_FEE);
+		p.setComments(paymentType.RIDE_FEE);
 		p.processPayment();
 		mManager.payMap.put(this.bookingID, p);
 	}
