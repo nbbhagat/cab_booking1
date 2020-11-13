@@ -14,6 +14,9 @@ public class MemManager implements java.io.Serializable{
 	public ConcurrentHashMap<String, Payment> payMap=new ConcurrentHashMap<>();
 	public ConcurrentHashMap<String, Vehicle> driverVehicle=new ConcurrentHashMap<>();
         
+        private MemManager(){
+            
+        }
         
 	public static MemManager getInstance() {
         if (MManager == null) {
