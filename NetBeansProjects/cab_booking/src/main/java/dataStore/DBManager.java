@@ -170,7 +170,7 @@ public class DBManager{
 		ConcurrentHashMap<String, Payment> pmap = null;
 		      try
 		      {
-		         FileInputStream fis = new FileInputStream("ridehashmap.ser");
+		         FileInputStream fis = new FileInputStream("payhashmap.ser");
 		         ObjectInputStream ois = new ObjectInputStream(fis);
 		         pmap = (ConcurrentHashMap) ois.readObject();
 		         System.out.println("Deserialized HashMap data" + pmap);
