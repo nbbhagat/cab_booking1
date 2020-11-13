@@ -33,7 +33,7 @@ public class CabApp {
                     String userPass=addInput.next();
                     System.out.println(MManager.userMap);
                     User u=MManager.userMap.get(userId);
-                    
+                    u.getMManager().getInstance();
                     if(userId.charAt(0)=='P'&&u.getPassword().equals(userPass)){
                         
                         loginPassenger.doFun(u, AObj);
