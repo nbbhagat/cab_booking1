@@ -1,18 +1,17 @@
-package entity1;
+package entity;
 import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter 
 @Setter
-public class Bike extends Vehicle implements java.io.Serializable{
+public class Auto extends Vehicle implements java.io.Serializable{
     
-    int capacity=2;
-    double baseFare=70;
-    double factor=4;
+    int capacity=3;
+    double baseFare=100;
+    double factor=5;
     public void setId(){
-        this.vId="VB"+UUID.randomUUID().toString();
+        this.vId="VA"+UUID.randomUUID().toString();
     }
     @Override
     public String toString() {

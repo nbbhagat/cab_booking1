@@ -1,7 +1,9 @@
 package mainApp;
-import entity1.*;
+import entity.Location;
+import entity.User;
+import service.Ride;
+import service.BookingMgmt;
 import dataStore.MemManager;
-import services1.*;
 import java.util.Scanner;
 
 

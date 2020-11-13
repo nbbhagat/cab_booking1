@@ -1,4 +1,4 @@
-package entity1;
+package entity;
 
 import java.util.UUID;
 import lombok.Getter;

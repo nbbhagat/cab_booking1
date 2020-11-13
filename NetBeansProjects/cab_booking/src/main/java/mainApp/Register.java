@@ -1,8 +1,10 @@
 
 package mainApp;
-import entity1.*;
+import entity.Bike;
+import entity.Location;
+import entity.Auto;
+import entity.Car;
 import dataStore.MemManager;
-import services1.*;
 import java.util.Scanner;
 
 public class Register {

@@ -1,4 +1,4 @@
-package entity1;
+package entity;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;

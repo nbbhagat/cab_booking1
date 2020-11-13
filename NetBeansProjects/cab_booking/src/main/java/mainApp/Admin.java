@@ -1,5 +1,9 @@
 package mainApp;
-import entity1.*;
+import entity.Vehicle;
+import entity.User;
+import entity.Driver;
+import entity.Passenger;
+import entity.Location;
 import dataStore.MemManager;
 import dataStore.DBManager;
 import java.util.concurrent.ConcurrentHashMap;

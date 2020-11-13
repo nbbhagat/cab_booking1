@@ -1,6 +1,11 @@
 
-package services1;
-import entity1.*;
+package service;
+import entity.Vehicle;
+import entity.Auto;
+import entity.Bike;
+import entity.Driver;
+import entity.Location;
+import entity.Car;
 import enums.paymentType;
 
 import java.util.concurrent.ConcurrentMap;

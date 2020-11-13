@@ -1,7 +1,6 @@
 package mainApp;
-import entity1.*;
+import entity.User;
 import dataStore.MemManager;
-import services1.*;
 import java.util.Scanner;
 
 

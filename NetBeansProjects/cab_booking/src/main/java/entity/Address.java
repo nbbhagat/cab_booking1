@@ -1,4 +1,4 @@
-package entity1;
+package entity;
 
 public class Address {
     int blockNo;

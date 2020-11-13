@@ -1,4 +1,4 @@
-package services1;
+package service;
 
 import enums.paymentType;
 import java.io.Serializable;

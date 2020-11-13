@@ -1,7 +1,8 @@
 package mainApp;
-import entity1.*;
+import entity.User;
+import entity.Driver;
+import entity.Location;
 import dataStore.MemManager;
-import services1.*;
 import java.util.Scanner;
 
 public class LoginDriver {

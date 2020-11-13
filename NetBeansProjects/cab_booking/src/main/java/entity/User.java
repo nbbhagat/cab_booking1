@@ -1,10 +1,10 @@
-package entity1;
+package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import dataStore.MemManager;
-import services1.Payment;
-import services1.Ride;
+import service.Payment;
+import service.Ride;
 import lombok.Getter;
 import lombok.Setter;
 

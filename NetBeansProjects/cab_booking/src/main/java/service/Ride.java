@@ -1,5 +1,5 @@
-package services1;
-import entity1.Location;
+package service;
+import entity.Location;
 import lombok.Getter;
 import lombok.Setter;
 

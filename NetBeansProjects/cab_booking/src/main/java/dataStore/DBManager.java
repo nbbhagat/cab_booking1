@@ -1,9 +1,9 @@
 package dataStore;
 
-import services1.Payment;
-import services1.Ride;
-import entity1.Vehicle;
-import entity1.User;
+import service.Payment;
+import service.Ride;
+import entity.Vehicle;
+import entity.User;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
