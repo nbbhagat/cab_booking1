@@ -9,14 +9,6 @@ package enums;
  *
  * @author pranavasishmenon
  */
-public class region 
-
-    .java {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        // TODO code application logic here
-    }
+public enum region {
+    	DELHI, MUMBAI, CHENNAI, BANGALORE;
 }
