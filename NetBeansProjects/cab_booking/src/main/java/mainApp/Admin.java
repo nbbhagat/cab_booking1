@@ -1,11 +1,7 @@
 package mainApp;
-import entity.Location;
+import entity1.*;
 import dataStore.MemManager;
 import dataStore.DBManager;
-import entity.Vehicle;
-import entity.Passenger;
-import entity.Driver;
-import entity.User;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Admin {
@@ -16,19 +12,19 @@ public class Admin {
 	public void registerPassenger(String name,String pno, String pwd,Location location)
 	{
 		User p=new Passenger(name, pno, pwd,location);
-        mManager.userMap.put(p.userId,p);
-        System.out.println("Added details of Passenger "+p.userId);
+                mManager.userMap.put(p.getUserId(),p);
+                System.out.println("Added details of Passenger "+p.getUserId());
 		
 	}
 	
-	public void registerDriver( String name, String pno, String pwd,Location location, boolean status,Vehicle vehicle)
+	public void registerDriver( String name, String pno, String pwd, Location location, boolean status,Vehicle vehicle)
 	{
-		User d=new Driver(name, pno, pwd, location, status,vehicle);
-        mManager.userMap.put(d.userId,d);
-        System.out.println("Added details of Driver "+d.userId);
-		mManager.driverVehicle.put(d.userId,vehicle);
-		System.out.println("Vehicle "+vehicle.vId+" mapped to Driver "+d.userId);
-		System.out.println(mManager.driverVehicle.get(d.userId));
+		User d=new Driver(name, pno, pwd, location, status, vehicle);
+                mManager.userMap.put(d.getUserId(),d);
+                System.out.println("Added details of Driver "+d.getUserId());
+		mManager.driverVehicle.put(d.getUserId(),vehicle);
+		System.out.println("Vehicle "+vehicle.getVId()+" mapped to Driver "+d.getUserId());
+		System.out.println(mManager.driverVehicle.get(d.getUserId()));
 		
 	}
 	

@@ -1,14 +1,8 @@
 package mainApp;
 import mainApp.Admin;
-import entity.Location;
+import entity1.*;
 import dataStore.MemManager;
-import services.BookingMgmt;
-import services.Ride;
-import entity.Car;
-import entity.Bike;
-import entity.Auto;
-import entity.Driver;
-import entity.User;
+import services1.*;
 import java.util.Scanner;
 
 
@@ -117,7 +111,7 @@ public class CabApp {
                         String userPass=addInput.next();
                         System.out.println(MManager.userMap);
                         User u=MManager.userMap.get(userId);
-                        if(userId.charAt(0)=='P'&&u.password.equals(userPass)){
+                        if(userId.charAt(0)=='P'&&u.getPassword().equals(userPass)){
                              System.out.println("1. Book Cab");
                                 System.out.println("2. View Ride History");
                                 System.out.println("3. View Payment History");
@@ -231,7 +225,7 @@ public class CabApp {
                                 break;
                             }
 
-                        else if(userId.charAt(0)=='D'&&u.password.equals(userPass)){
+                        else if(userId.charAt(0)=='D'&&u.getPassword().equals(userPass)){
                                     System.out.println("Enter the number according your option");
                                     System.out.println("1. Set status");
                                     System.out.println("2. Update current location");
@@ -250,7 +244,7 @@ public class CabApp {
                                                 System.out.println("If u want to change to" + !status + "press 1 otherwise 2");
                                                 int input1 = input.nextInt();
                                                 if (input1 == 1) {
-                                                    ((Driver) u).setStatus();
+                                                    ((Driver) u).setSstatus();
                                                     System.out.println("status changed to" + !status);
                                                 } else {
                                                     System.out.println("status not changed to");

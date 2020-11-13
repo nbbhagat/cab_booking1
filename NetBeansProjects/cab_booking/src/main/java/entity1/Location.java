@@ -1,9 +1,15 @@
-package entity;
+package entity1;
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter 
+@Setter
 public class Location implements java.io.Serializable{
-    public int latitude;
-    public int longitude;
-    public region r; 
+    int latitude;
+    int longitude;
+    region r; 
+    
     public enum region {
     	DELHI, MUMBAI, CHENNAI, BANGALORE;
     }

@@ -1,9 +1,7 @@
 package dataStore;
-import dataStore.DBManager;
-import services.Payment;
-import services.Ride;
-import entity.Vehicle;
-import entity.User;
+import services1.*;
+import entity1.Vehicle;
+import entity1.User;
 import java.util.concurrent.ConcurrentHashMap; 
 import java.util.*;
 import java.io.File;
@@ -85,24 +83,4 @@ public class MemManager implements java.io.Serializable{
         }
         return MManager;
     }
-	/*public void userMapInit()
-	{
-		userMap = new ConcurrentHashMap<>();
-	}
-	public void userBookingInit()
-	{
-		userBooking = new ConcurrentHashMap<>();
-	}
-	public void rideMapInit()
-	{
-		rideMap = new ConcurrentHashMap<>();
-	}
-	public void payMapInit()
-	{
-		payMap = new ConcurrentHashMap<>();
-	}
-	public void dvMapInit()
-	{
-		driverVehicle = new ConcurrentHashMap<>();
-	} */
 }

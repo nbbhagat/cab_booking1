@@ -1,4 +1,5 @@
-package entity;
+package entity1;
+
 public class Address {
     int blockNo;
     String street;

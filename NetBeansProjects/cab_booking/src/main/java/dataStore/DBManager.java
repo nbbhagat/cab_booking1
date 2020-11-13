@@ -1,9 +1,9 @@
 package dataStore;
 
-import services.Payment;
-import services.Ride;
-import entity.Vehicle;
-import entity.User;
+import services1.Payment;
+import services1.Ride;
+import entity1.Vehicle;
+import entity1.User;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,8 +12,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.io.Serializable;
 
 
 public class DBManager{

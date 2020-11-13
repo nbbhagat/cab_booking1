@@ -1,12 +1,5 @@
-package services;
-import entity.Location;
-import services.Payment;
-import services.Ride;
-import entity.Vehicle;
-import entity.Car;
-import entity.Bike;
-import entity.Auto;
-import entity.Driver;
+package services1;
+import entity1.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -26,13 +19,11 @@ public class BookingMgmt {
 		this.passengerID = passengerID;
 		if(mManager.userBooking.get(this.passengerID)!=null)
 		{
-			ArrayList<String> al = mManager.userBooking.get(this.passengerID);
-			al.add(this.bookingID);
-			mManager.userBooking.put(this.passengerID,al);
+			mManager.userBooking.get(this.passengerID).add(this.bookingID);
 		}
 		else
 		{
-			ArrayList<String> al = new ArrayList<String>();
+			ArrayList<String> al = new ArrayList<>();
 			al.add(this.bookingID);
 			mManager.userBooking.put(this.passengerID,al);
 		}		
@@ -43,29 +34,29 @@ public class BookingMgmt {
 		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr1 = map.entrySet().iterator(); 
 		while(itr1.hasNext()) {
 			ConcurrentHashMap.Entry<String, Vehicle> entry1 = itr1.next(); 
-			System.out.println(entry1.getValue().getvId().charAt(1)+" "+vehicleType);		
+			System.out.println(entry1.getValue().getVId().charAt(1)+" "+vehicleType);		
 			System.out.println(mManager.userMap.get(entry1.getKey()));
 		}
 		System.out.println("All fine till now");
 		ConcurrentMap<String, Vehicle> availableDrivers = 
 		    map.entrySet()
 		       .stream()
-		       .filter(e -> e.getValue().getvId().charAt(1)== vehicleType)
-		       .filter(e -> ((Driver)mManager.userMap.get(e.getKey())).status == true)
-		       .filter(e -> ((Driver)mManager.userMap.get(e.getKey())).location.r.equals(pLocation.r))
+		       .filter(e -> e.getValue().getVId().charAt(1)== vehicleType)
+		       .filter(e -> ((Driver)mManager.userMap.get(e.getKey())).isStatus() == true)
+		       .filter(e -> ((Driver)mManager.userMap.get(e.getKey())).getLocation().getR().equals(pLocation.getR()))
 		       .collect(Collectors.toConcurrentMap(Map.Entry::getKey, Map.Entry::getValue));
 		System.out.println(availableDrivers);
 		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr = availableDrivers.entrySet().iterator();
 		String closestDriver="lol";
 		if(itr.hasNext()) {
 			ConcurrentHashMap.Entry<String, Vehicle> entry = itr.next(); 
-			Location dLocation = mManager.userMap.get(entry.getKey()).location;
+			Location dLocation = mManager.userMap.get(entry.getKey()).getLocation();
 			double minDistance = distanceBetweenLocations(pLocation, dLocation);
 			closestDriver = entry.getKey();
 			double distance = 0.0;
 			while (itr.hasNext()) { 
 				entry = itr.next(); 
-				dLocation = mManager.userMap.get(entry.getKey()).location;
+				dLocation = mManager.userMap.get(entry.getKey()).getLocation();
 				distance = distanceBetweenLocations(pLocation, dLocation);
 				if(distance < minDistance) {
 					minDistance = distance;
@@ -76,21 +67,20 @@ public class BookingMgmt {
 		return closestDriver;
 	}
 	public double calculateFare(Location source, Location dest, Vehicle v) {
-                String vId=v.getvId();
-                //String str=new String();
+                String vId=v.getVId();
                 double vFare=0;
                 double dFare=0;
                 switch(vId.charAt(1)){
                     case 'A' : {
-                        vFare = ((Auto)v).baseFare;
-                        dFare=((Auto)v).factor;
+                        vFare = ((Auto)v).getBaseFare();
+                        dFare=((Auto)v).getFactor();
                         break;
                     }
                         
                     case 'B' :
                     {
-                       vFare = ((Bike)v).baseFare;
-                       dFare=((Bike)v).factor;
+                       vFare = ((Bike)v).getBaseFare();
+                       dFare=((Bike)v).getFactor();
                         break;
                     }
                     case 'C' :
@@ -101,31 +91,25 @@ public class BookingMgmt {
                     }
                     
                 }
-                
-		
 		double distance = distanceBetweenLocations(source, dest);
 		return (vFare +  distance * dFare);
 	}
-	//	if waitingTime concept is added
-	//	public void calculateActualFare() {}
 	public double distanceBetweenLocations(Location l1, Location l2) {
-		int x1 = l1.longitude;
-		int y1 = l1.latitude;
-		int x2 = l2.longitude;
-		int y2 = l2.latitude;
+		int x1 = l1.getLongitude();
+		int y1 = l1.getLatitude();
+		int x2 = l2.getLongitude();
+		int y2 = l2.getLatitude();
 		int x = Math.abs(x2 -x1);
 		int y = Math.abs(y2 -y1);
 		return Math.sqrt(x*x + y*y);
 	}
-//	public void driverRequest() {	}
-//	public void generateOTP() {	}
 	public Ride startRide(Location source, Location dest,  String driverID) {
 		String startTime = LocalTime.now().toString();
 		String date = LocalDate.now().toString();
 		Ride r =new Ride(startTime, source, dest, date, bookingID);
 		//set driver status as not available
 		Driver d = (Driver)mManager.userMap.get(driverID);
-		d.status = false;
+		d.setSstatus() ;
 		mManager.userMap.put(driverID,d);
 		mManager.rideMap.put(this.bookingID,r);
 		return r;
@@ -138,7 +122,7 @@ public class BookingMgmt {
 		mManager.rideMap.put(this.bookingID,r);
 		//set driver status as available
 		Driver d = (Driver)mManager.userMap.get(driverID);
-		d.status = true;
+		d.setSstatus() ;
 		mManager.userMap.put(driverID,d);
 	} 
 	public void cancelRide(String mode,  String passID) {
