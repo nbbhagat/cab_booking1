@@ -52,6 +52,7 @@ public class Register {
                             sc.next(); // this is important!
                         }
                         pwd = sc.next();
+                        flag=false;
                     } while (pwd.length() < 8);
 
 
@@ -68,23 +69,43 @@ public class Register {
                             sc.next(); // this is important!
                         }
                         sLatitude = sc.nextInt();
+                        flag=false;
                     } while (sLatitude>100||sLatitude<0);
 
 
                     int sLongitude;
                     flag=true;
+                    int low;
+                    int high;
+                    if(sLatitude<=25) {
+                        low = 0;
+                        high = 25;
+                    }
+                    else if(sLatitude<=50) {
+                        low = 25;
+                        high = 50;
+                    }
+                    else if(sLatitude<=75) {
+                        low = 50;
+                        high = 75;
+                    }
+                    else {
+                        low = 75;
+                        high = 100;
+                    }
                     do {
                         if(flag==false)
                         {
                             System.out.println("Invalid coordinate");
                         }
-                        System.out.println("\nLongitude: (1-100)");
+                        System.out.println("\nLongitude: ("+low+" - "+high+")");
                         while (!sc.hasNextInt()) {
                             System.out.println("That's not a valid location!");
                             sc.next(); // this is important!
                         }
                         sLongitude = sc.nextInt();
-                    } while (sLongitude>100||sLongitude<0);
+                        flag=false;
+                    } while (sLongitude>high||sLongitude<low);
 
                     Location l = new Location(sLatitude,sLongitude);
                     AObj.registerPassenger( name, pno, pwd, l);
@@ -125,6 +146,7 @@ public class Register {
                             sc.next(); // this is important!
                         }
                         pwd = sc.next();
+                        flag=false;
                     } while (pwd.length() < 8);
 
                     int Latitude;
@@ -140,6 +162,7 @@ public class Register {
                             sc.next(); // this is important!
                         }
                         Latitude = sc.nextInt();
+                        flag=false;
                     } while (Latitude>100||Latitude<0);
 
 
@@ -156,6 +179,7 @@ public class Register {
                             sc.next(); // this is important!
                         }
                         Longitude = sc.nextInt();
+                        flag=false;
                     } while (Longitude>100||Longitude<0);
 
                     Location l = new Location(Latitude, Longitude);
