@@ -159,12 +159,44 @@ public class Register {
                     } while (Longitude>100||Longitude<0);
 
                     Location l = new Location(Latitude, Longitude);
-                    System.out.println("Enter Status - ");
-                    Boolean status = addInput.nextBoolean();
-                    System.out.println("Enter the vehicle type");
-                    System.out.println("1. Auto \n 2.Bike \n 3. Car");
-                    int type=addInput.nextInt();
-                    switch(type){
+                    int answer;
+                    boolean flag1=true;
+                    do {
+                        if(flag1==false)
+                        {
+                            System.out.println("Invalid input");
+                        }
+                        System.out.println("Enter Status:\n1. Available\n2. Unavailable");
+                        while (!sc.hasNext()) 
+                        {
+                            System.out.println("That's not a valid input!");
+                            sc.next(); // this is important!
+                        }
+                        answer = sc.nextInt();
+                        flag1=false;
+                    } while (answer!=1&&answer!=2);
+                    boolean status = false;
+                    switch(answer) {
+                        case 1 -> status = true;
+                        case 2 -> status = false;
+                    }
+                    flag1=true;
+                    do {
+                        if(flag1==false)
+                        {
+                            System.out.println("Invalid input");
+                        }
+                        System.out.println("Enter the vehicle type");
+                        System.out.println("1. Auto \n 2.Bike \n 3. Car");
+                        while (!sc.hasNext()) 
+                        {
+                            System.out.println("That's not a valid input!");
+                            sc.next(); // this is important!
+                        }
+                        answer = sc.nextInt();
+                        flag1=false;
+                    } while (answer!=1&&answer!=2&&answer!=3);
+                    switch(answer){
                             case 1 : {
                                 Auto auto=new Auto();
                                 auto.setId();
