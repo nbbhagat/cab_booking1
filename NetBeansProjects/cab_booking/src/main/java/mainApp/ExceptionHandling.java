@@ -54,7 +54,7 @@ public class ExceptionHandling {
                     System.out.println("Invalid input");
                 }
                 System.out.println("Enter the vehicle type");
-                System.out.println("A. Auto \n B.Bike \n C. Car");
+                System.out.println("A. Auto \nB. Bike \nC. Car");
                 while (!sc.hasNext()) 
                 {
                     System.out.println("That's not a valid input!");

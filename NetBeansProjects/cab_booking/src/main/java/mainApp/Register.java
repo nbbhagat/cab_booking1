@@ -20,10 +20,8 @@ public class Register {
         switch (option1) {
             case 1: //Passenger Registration
                 {
-                    Scanner addInput1 = new Scanner(System.in);
                     System.out.println("Enter Name:");
                     String name = addInput.next();
-                    Scanner sc = new Scanner(System.in);
                     
                     String pno=exceptionHandling.phoneNoException();
                     String pwd=exceptionHandling.passwordException();
@@ -46,8 +44,6 @@ public class Register {
                     
                     Location l = new Location(dLatitude, dLongitude);
                     int answer= exceptionHandling.statusException();
-                    
-                    
                     boolean status = false;
                     switch(answer) {
                         case 1 -> status = true;
@@ -64,7 +60,7 @@ public class Register {
 
                             case 'B' :
                             {
-                               Bike bike=new Bike();
+                                Bike bike=new Bike();
                                 bike.setId();
                                 AObj.registerDriver( name, pno, pwd, l, status, bike);
                                 break;

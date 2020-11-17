@@ -31,15 +31,11 @@ public class LoginPassenger {
                             System.out.println("Enter your current Location:\nLatitude: ");
                             int sLatitude = exceptionHandling.latitudeException();
                             System.out.println("Longitude: ");
-                            int sLongitude = exceptionHandling.longitudeException(sLatitude);
-                            
-                            
+                            int sLongitude = exceptionHandling.longitudeException(sLatitude);                                                       
                             Scanner sc = new Scanner(System.in);
                             char  vehicleType = exceptionHandling.vehicleTypeException();
                             
-//                            System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
-//                            vehicleType = addInput.next().charAt(0); //must change
-                            System.out.println("Enter destination \nLatitude");
+                            System.out.println("Enter destination: \nLatitude:");
                             int dLatitude = exceptionHandling.latitudeException();
                             System.out.println("Longitude: ");
                             int dLongitude = exceptionHandling.longitudeException(dLatitude);
@@ -64,7 +60,6 @@ public class LoginPassenger {
                                             String arrived = addInput.next();
                                             System.out.println("You have arrived at your destination! Please rate your ride (1-5):");
                                             int rating = addInput.nextInt();
-
 
                                             double amount = bm.calculateFare(source, dest, mManager.driverVehicle.get(availableDriverID));
                                             bm.endRide(r, rating, availableDriverID);
@@ -125,7 +120,6 @@ public class LoginPassenger {
                         case 3:
                             {
                                 u.viewPaymentHistory(userId);
-                                System.out.println("after payment");
                                 break;
                             }
                         case 4:

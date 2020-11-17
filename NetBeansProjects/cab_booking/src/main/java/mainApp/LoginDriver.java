@@ -14,6 +14,7 @@ public class LoginDriver {
         boolean login = true;
         while (login) {    
             String userId=u.getUserId();
+            ExceptionHandling exceptionHandling=new ExceptionHandling();
             Scanner input = new Scanner(System.in);
             System.out.println("1. Set status");
             System.out.println("2. Update current location");
@@ -25,22 +26,24 @@ public class LoginDriver {
             switch (option_1) {
                     case 1: {
                             boolean status = ((Driver) u).isStatus();
-                            System.out.println("your current status is " + status);
-                            System.out.println("If u want to change to" + !status + "press 1 otherwise 2");
+                            String statusString = (status==true)?"Available":"Unavailable";
+                            String statusOppString = (status==true)?"Unavailable":"Available";
+                            System.out.println("Your current status is " + statusString);
+                            System.out.println("If u want to change to " + statusOppString + ", press 1. Press 2 otherwise:");
                             int input1 = input.nextInt();
                             if (input1 == 1) {
                                 ((Driver) u).setSstatus();
-                                System.out.println("status changed to" + !status);
+                                System.out.println("Status changed to" + statusOppString);
                             } else {
-                                System.out.println("status not changed ");
+                                System.out.println("Status remains as " + statusString);
                             }
                             break;
                     }
 
                     case 2: {
                         System.out.println("Enter your current location");
-                        int latitude = input.nextInt();
-                        int longitude = input.nextInt();
+                        int latitude = exceptionHandling.latitudeException();
+                        int longitude = exceptionHandling.longitudeException(latitude);
                         Location location = new Location(latitude, longitude);
                         u.setLocation(location);
                         System.out.println("Location updated");
