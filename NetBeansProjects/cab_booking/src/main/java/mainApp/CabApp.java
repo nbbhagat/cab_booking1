@@ -43,7 +43,7 @@ public class CabApp {
                         loginDriver.doFun(u, AObj);
                     }    
                     else{
-                            System.out.println("password incorrect");
+                            System.out.println("Incorrect credentials");
                     }
             }
             else if(option==3){

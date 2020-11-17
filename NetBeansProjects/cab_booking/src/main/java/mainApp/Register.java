@@ -20,7 +20,7 @@ public class Register {
             case 1: //Passenger Registration
                 {
                     Scanner addInput1 = new Scanner(System.in);
-                    System.out.println("Enter Name - ");
+                    System.out.println("Enter Name:");
                     String name = addInput.next();
                     Scanner sc = new Scanner(System.in);
                     String pno;
@@ -30,7 +30,7 @@ public class Register {
                         {
                             System.out.println("Invalid phone number");
                         }
-                        System.out.println("Enter 10 digit Phone Number - ");
+                        System.out.println("Enter 10 digit Phone Number:");
                         while (!sc.hasNext()) {
                             System.out.println("That's not a valid number!");
                             sc.next(); // this is important!
@@ -46,7 +46,7 @@ public class Register {
                         {
                             System.out.println("Invalid password");
                         }
-                        System.out.println("Enter Password - (minimum 8 characters)");
+                        System.out.println("Enter Password: (minimum 8 characters)");
                         while (!sc.hasNext()) {
                             System.out.println("That's not a valid password!");
                             sc.next(); // this is important!
@@ -65,7 +65,7 @@ public class Register {
                         }
                         System.out.println("Enter your current Location:\nLatitude: (1-100)");
                         while (!sc.hasNextInt()) {
-                            System.out.println("That's not a valid location!");
+                            System.out.println("That's not a valid coordinate!");
                             sc.next(); // this is important!
                         }
                         sLatitude = sc.nextInt();
@@ -100,7 +100,7 @@ public class Register {
                         }
                         System.out.println("\nLongitude: ("+low+" - "+high+")");
                         while (!sc.hasNextInt()) {
-                            System.out.println("That's not a valid location!");
+                            System.out.println("That's not a valid coordinate!");
                             sc.next(); // this is important!
                         }
                         sLongitude = sc.nextInt();
@@ -113,8 +113,7 @@ public class Register {
                 }
             case 2: //Driver Registration
                 {
-//                                    Scanner addInput1 = new Scanner(System.in);
-                    System.out.println("Enter Name - ");
+                    System.out.println("Enter Name:");
                     String name = addInput.next();
                     Scanner sc = new Scanner(System.in);
                     String pno;
@@ -124,7 +123,7 @@ public class Register {
                         {
                             System.out.println("Invalid phone number");
                         }
-                        System.out.println("Enter 10 digit Phone Number - ");
+                        System.out.println("Enter 10 digit Phone Number:");
                         while (!sc.hasNext()) {
                             System.out.println("That's not a valid number!");
                             sc.next(); // this is important!
@@ -140,7 +139,7 @@ public class Register {
                         {
                             System.out.println("Invalid password");
                         }
-                        System.out.println("Enter Password - (minimum 8 characters)");
+                        System.out.println("Enter Password: (minimum 8 characters)");
                         while (!sc.hasNext()) {
                             System.out.println("That's not a valid password!");
                             sc.next(); // this is important!
@@ -149,7 +148,7 @@ public class Register {
                         flag=false;
                     } while (pwd.length() < 8);
 
-                    int Latitude;
+                    int dLatitude;
                     flag=true;
                     do {
                         if(flag==false)
@@ -161,28 +160,46 @@ public class Register {
                             System.out.println("That's not a valid location!");
                             sc.next(); // this is important!
                         }
-                        Latitude = sc.nextInt();
+                        dLatitude = sc.nextInt();
                         flag=false;
-                    } while (Latitude>100||Latitude<0);
+                    } while (dLatitude>100||dLatitude<0);
+                    
+                    int low;
+                    int high;
+                    if(dLatitude<=25) {
+                        low = 0;
+                        high = 25;
+                    }
+                    else if(dLatitude<=50) {
+                        low = 25;
+                        high = 50;
+                    }
+                    else if(dLatitude<=75) {
+                        low = 50;
+                        high = 75;
+                    }
+                    else {
+                        low = 75;
+                        high = 100;
+                    }
 
-
-                    int Longitude;
+                    int dLongitude;
                     flag=true;
                     do {
                         if(flag==false)
                         {
                             System.out.println("Invalid coordinate");
                         }
-                        System.out.println("\nLongitude: (1-100)");
+                        System.out.println("\nLongitude: ("+low+" - "+high+")");
                         while (!sc.hasNextInt()) {
                             System.out.println("That's not a valid location!");
                             sc.next(); // this is important!
                         }
-                        Longitude = sc.nextInt();
+                        dLongitude = sc.nextInt();
                         flag=false;
-                    } while (Longitude>100||Longitude<0);
+                    } while (dLongitude>high||dLongitude<low);
 
-                    Location l = new Location(Latitude, Longitude);
+                    Location l = new Location(dLatitude, dLongitude);
                     int answer;
                     boolean flag1=true;
                     do {
@@ -205,6 +222,7 @@ public class Register {
                         case 2 -> status = false;
                     }
                     flag1=true;
+                    answer=0;
                     do {
                         if(flag1==false)
                         {
