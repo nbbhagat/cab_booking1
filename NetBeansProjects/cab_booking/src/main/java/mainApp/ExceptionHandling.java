@@ -23,14 +23,15 @@ public class ExceptionHandling {
                     sc.next(); // this is important!
                 }
                 pwd = sc.next();
+            flag=false;
             } while (pwd.length() < 8);
         return pwd;
     }
     public int statusException(){
         int answer;
-        boolean flag1=true;
+        boolean flag=true;
             do {
-                if(flag1==false)
+                if(flag==false)
                 {
                     System.out.println("Invalid input");
                 }
@@ -41,15 +42,15 @@ public class ExceptionHandling {
                     sc.next(); // this is important!
                 }
                 answer = sc.nextInt();
-                flag1=false;
+                flag=false;
             } while (answer!=1&&answer!=2);
             return answer;
     }
     public char vehicleTypeException(){
-        boolean flag1=true;
+        boolean flag=true;
         char answer;
             do {
-                if(flag1==false)
+                if(flag==false)
                 {
                     System.out.println("Invalid input");
                 }
@@ -61,7 +62,7 @@ public class ExceptionHandling {
                     sc.next(); // this is important!
                 }
                 answer = sc.next().charAt(0);
-                flag1=false;
+                flag=false;
             } while (answer!='A' &&answer!='B' &&answer!='C');
             return  answer;
     }
@@ -80,6 +81,7 @@ public class ExceptionHandling {
                     sc.next(); // this is important!
                 }
                 latitude = sc.nextInt();
+                flag=false;
             } while (latitude>100||latitude<0);
         return latitude;
     }
@@ -109,12 +111,13 @@ public class ExceptionHandling {
                 if(flag==false)
                     System.out.println("Invalid coordinate");
                 
-                System.out.println("Enter your current Location:\nLatitude: (1-100)");
+                System.out.println("Enter your current Location:\nLongitude: ("+low+" - "+high+")");
                 while (!sc.hasNextInt()) {
                     System.out.println("That's not a valid location!");
                     sc.next(); // this is important!
                 }
                 longitude = sc.nextInt();
+                flag=false;
             } while(longitude>high||longitude<low);
         return longitude;
     }
