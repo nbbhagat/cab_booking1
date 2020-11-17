@@ -31,8 +31,24 @@ public class LoginPassenger {
                             int sLatitude = addInput.nextInt();
                             System.out.println("Longitude: ");
                             int sLongitude = addInput.nextInt();
-                            System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
-                            char vehicleType = addInput.next().charAt(0); //must change
+                            Scanner sc = new Scanner(System.in);
+                            char vehicleType;
+                            boolean flag=true;
+                            do {
+                                if(flag==false)
+                                {
+                                    System.out.println("Invalid input");
+                                }
+                                System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
+                                while (!sc.hasNext()) {
+                                    System.out.println("That's not a valid input!");
+                                    sc.next(); // this is important!
+                                }
+                                vehicleType = sc.next().charAt(0);
+                                flag=false;
+                            } while (vehicleType!='A'&&vehicleType!='B'&&vehicleType!='C');
+//                            System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
+//                            vehicleType = addInput.next().charAt(0); //must change
                             System.out.println("Enter destination \nLatitude");
                             int dLatitude = addInput.nextInt();
                             System.out.println("Longitude: ");
