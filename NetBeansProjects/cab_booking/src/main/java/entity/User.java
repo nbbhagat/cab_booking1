@@ -45,7 +45,10 @@ public class User implements java.io.Serializable {
                         for (int i = 0; i < record.size(); i++) {
                                 String bookingId=record.get(i) ;
                                 Ride ride=mManager.rideMap.get(bookingId);
-                                System.out.println(i+1+". "+ride);
+                                if(ride!=null)
+                                    System.out.println(i+1+". "+ride);
+                                else
+                                    System.out.println(i+1+". Ride cancelled");
                         }
 
                     }
