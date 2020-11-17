@@ -32,7 +32,7 @@ public class LoginDriver {
                                 ((Driver) u).setSstatus();
                                 System.out.println("status changed to" + !status);
                             } else {
-                                System.out.println("status not changed to");
+                                System.out.println("status not changed ");
                             }
                             break;
                     }

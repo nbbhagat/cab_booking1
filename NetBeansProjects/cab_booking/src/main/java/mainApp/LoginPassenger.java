@@ -17,6 +17,7 @@ public class LoginPassenger {
             BookingMgmt bm = new BookingMgmt();
             Scanner addInput = new Scanner(System.in);
                 boolean login = true;
+                ExceptionHandling exceptionHandling=new ExceptionHandling();
                 while (login) {
                     System.out.println("1. Book Cab");
                     System.out.println("2. View Ride History");
@@ -28,31 +29,21 @@ public class LoginPassenger {
                     switch (option3) {
                         case 1: { //Book Cab
                             System.out.println("Enter your current Location:\nLatitude: ");
-                            int sLatitude = addInput.nextInt();
+                            int sLatitude = exceptionHandling.latitudeException();
                             System.out.println("Longitude: ");
-                            int sLongitude = addInput.nextInt();
+                            int sLongitude = exceptionHandling.longitudeException(sLatitude);
+                            
+                            
                             Scanner sc = new Scanner(System.in);
-                            char vehicleType;
-                            boolean flag=true;
-                            do {
-                                if(flag==false)
-                                {
-                                    System.out.println("Invalid input");
-                                }
-                                System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
-                                while (!sc.hasNext()) {
-                                    System.out.println("That's not a valid input!");
-                                    sc.next(); // this is important!
-                                }
-                                vehicleType = sc.next().charAt(0);
-                                flag=false;
-                            } while (vehicleType!='A'&&vehicleType!='B'&&vehicleType!='C');
+                            char  vehicleType = exceptionHandling.vehicleTypeException();
+                            
 //                            System.out.println("Select preferred vehicle type:\n A. Auto \n B. Bike \n C. Car. ");
 //                            vehicleType = addInput.next().charAt(0); //must change
                             System.out.println("Enter destination \nLatitude");
-                            int dLatitude = addInput.nextInt();
+                            int dLatitude = exceptionHandling.latitudeException();
                             System.out.println("Longitude: ");
-                            int dLongitude = addInput.nextInt();
+                            int dLongitude = exceptionHandling.longitudeException(dLatitude);
+                            
                             System.out.println("Searching for cabs...");
                             bm.createNewBooking(userId);
                             Location source = new Location(sLatitude, sLongitude);
@@ -128,19 +119,19 @@ public class LoginPassenger {
                         }
                         case 2:
                             {
-                            u.viewRideHistory(userId);
-                            break;
+                                u.viewRideHistory(userId);
+                                break;
                             }
                         case 3:
                             {
-                            u.viewPaymentHistory(userId);
-                            System.out.println("after payment");
-                            break;
+                                u.viewPaymentHistory(userId);
+                                System.out.println("after payment");
+                                break;
                             }
                         case 4:
                             {
-                            login = false;
-                            break;
+                                login = false;
+                                break;
                             }
 
                     }

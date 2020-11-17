@@ -39,7 +39,7 @@ public class BookingMgmt {
 		}		
             
         }
-	public String findNearestCab(Location pLocation, char vehicleType) {
+	public String findNearestCab(Location pLocation,char vehicleType) {
 		ConcurrentMap<String, Vehicle> map = mManager.driverVehicle;
 		Iterator<ConcurrentHashMap.Entry<String, Vehicle> > itr1 = map.entrySet().iterator(); 
 		while(itr1.hasNext()) {
