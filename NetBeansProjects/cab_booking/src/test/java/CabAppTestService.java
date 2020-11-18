@@ -24,7 +24,7 @@ public class CabAppTestService {
     {
         admin = new Admin();
         Location source = new Location(26,34);
-        Passenger pass1 = Passenger.builder().name("shwetha").phoneNo("5555555555").password("shwethalol").location(source).build();
+        User pass1 = Passenger.builder().name("shwetha").phoneNo("5555555555").password("shwethalol").location(source).build();
         Auto auto = new Auto();
         Bike bike = new Bike();
         Car car = new Car();
@@ -32,18 +32,15 @@ public class CabAppTestService {
         Driver driver2 = Driver.builder().name("driver2").phoneNo("5555555555").password("driver2lol").location(source).status(true).vehicle(bike).build();
         Driver driver3 = Driver.builder().name("driver3").phoneNo("5555555555").password("driver3lol").location(source).status(true).vehicle(car).build();
 
-        ConcurrentHashMap<String, User> userMap= new ConcurrentHashMap<>();
-        ConcurrentHashMap<String, Vehicle> driverVehicle=new ConcurrentHashMap<>();
-
-        userMap.put(pass1.getUserId(), pass1);
-        userMap.put(driver1.getUserId(), driver1);
-        userMap.put(driver2.getUserId(), driver2);
-        userMap.put(driver3.getUserId(), driver3);
-        driverVehicle.put(driver1.getUserId(),auto);
-        driverVehicle.put(driver2.getUserId(),bike);
-        driverVehicle.put(driver3.getUserId(),car);
-
         Mmanager = MemManager.getInstance();
+
+        Mmanager.userMap.put(pass1.getUserId(), pass1);
+        Mmanager.userMap.put(driver1.getUserId(), driver1);
+        Mmanager.userMap.put(driver2.getUserId(), driver2);
+        Mmanager.userMap.put(driver3.getUserId(), driver3);
+        Mmanager.driverVehicle.put(driver1.getUserId(),auto);
+        Mmanager.driverVehicle.put(driver2.getUserId(),bike);
+        Mmanager.driverVehicle.put(driver3.getUserId(),car);
 
     }
 
