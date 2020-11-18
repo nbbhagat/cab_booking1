@@ -22,7 +22,6 @@ public class User implements java.io.Serializable {
         float avgRating=0;
         
         public User(){
-
         }
         public User(String name, String phoneNo,String password,Location location){
                 this.name=name;
@@ -39,7 +38,9 @@ public class User implements java.io.Serializable {
         }
 
         public  void viewRideHistory(String userId){
+                this.mManager=MemManager.getInstance();
                 ArrayList<String> record= mManager.userBooking.get(userId);
+                    
                     if(record!=null)
                     {
                         for (int i = 0; i < record.size(); i++) {
@@ -56,6 +57,7 @@ public class User implements java.io.Serializable {
         }
 
         public  void viewPaymentHistory(String userId){
+            this.mManager=MemManager.getInstance();
                 ArrayList<String> record= mManager.userBooking.get(userId);
                 if(record!=null)
                 {
