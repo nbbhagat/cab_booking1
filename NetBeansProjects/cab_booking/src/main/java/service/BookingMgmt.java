@@ -14,6 +14,11 @@ import java.util.*;
 import java.time.*;
 import dataStore.MemManager;
 import java.util.concurrent.ConcurrentHashMap;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter 
+@Setter
 public class BookingMgmt {
         private MemManager mManager;
 	String passengerID;
@@ -73,7 +78,8 @@ public class BookingMgmt {
 					closestDriver = entry.getKey();
 				}
 			} 	
-		}
+		
+                }
 		return closestDriver;
 	}
 	public double calculateFare(Location source, Location dest, Vehicle v) {
@@ -130,9 +136,10 @@ public class BookingMgmt {
 		r.setEndTime(endTime);
 		r.setRating(rating);
 		mManager.rideMap.put(this.bookingID,r);
-		//set driver status as available
 		Driver d = (Driver)mManager.userMap.get(driverID);
 		d.setSstatus() ;
+                Location dlocation = r.getDest();
+                d.setLocation(dlocation);
 		mManager.userMap.put(driverID,d);
 	} 
 	public void cancelRide(String mode,  String passID) {

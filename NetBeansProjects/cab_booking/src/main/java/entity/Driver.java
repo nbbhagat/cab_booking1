@@ -21,7 +21,7 @@ public class Driver extends User implements java.io.Serializable {
 
         @Override
         public String toString(){
-            return "name:-> "+this.name+", phoneNo-> "+this.phoneNo+", avgRating-> "+this.avgRating+", location-> "+this.location;
+            return "name:-> "+this.name+", phoneNo-> "+this.phoneNo+", avgRating-> "+this.avgRating+", location-> "+this.location+", status="+this.status;
         }
 }
 

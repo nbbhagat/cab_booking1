@@ -22,9 +22,10 @@ public class Register {
                 {
                     System.out.println("Enter Name:");
                     String name = addInput.next();
-                    
+                    System.out.println("Enter Current location:");
                     String pno=exceptionHandling.phoneNoException();
                     String pwd=exceptionHandling.passwordException();
+                    
                     int sLatitude=exceptionHandling.latitudeException();
                     int sLongitude=exceptionHandling.longitudeException(sLatitude);
                     
@@ -39,6 +40,8 @@ public class Register {
                     Scanner sc = new Scanner(System.in);
                     String pno=exceptionHandling.phoneNoException();
                     String pwd=exceptionHandling.passwordException();
+                    
+                    System.out.println("Enter Current location:");
                     int dLatitude=exceptionHandling.latitudeException();
                     int dLongitude=exceptionHandling.longitudeException(dLatitude);
                     

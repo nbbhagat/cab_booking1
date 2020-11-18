@@ -75,7 +75,7 @@ public class ExceptionHandling {
                 if(flag==false)
                     System.out.println("Invalid coordinate");
                 
-                System.out.println("Enter your current Location:\nLatitude: (1-100)");
+                System.out.println("Enter the Location:\nLatitude: (1-100)");
                 while (!sc.hasNextInt()) {
                     System.out.println("That's not a valid latitude!");
                     sc.next(); // this is important!
@@ -111,7 +111,7 @@ public class ExceptionHandling {
                 if(flag==false)
                     System.out.println("Invalid coordinate");
                 
-                System.out.println("Enter your current Location:\nLongitude: ("+low+" - "+high+")");
+                System.out.println("Longitude: ("+low+" - "+high+")");
                 while (!sc.hasNextInt()) {
                     System.out.println("That's not a valid location!");
                     sc.next(); // this is important!

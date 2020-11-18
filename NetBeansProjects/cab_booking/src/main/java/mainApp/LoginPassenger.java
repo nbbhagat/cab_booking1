@@ -4,6 +4,7 @@ import entity.User;
 import service.Ride;
 import service.BookingMgmt;
 import dataStore.MemManager;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -28,16 +29,15 @@ public class LoginPassenger {
 
                     switch (option3) {
                         case 1: { //Book Cab
-                            System.out.println("Enter your current Location:\nLatitude: ");
+                            System.out.println("Current location ");
                             int sLatitude = exceptionHandling.latitudeException();
-                            System.out.println("Longitude: ");
+                            
                             int sLongitude = exceptionHandling.longitudeException(sLatitude);                                                       
                             Scanner sc = new Scanner(System.in);
                             char  vehicleType = exceptionHandling.vehicleTypeException();
                             
-                            System.out.println("Enter destination: \nLatitude:");
+                            System.out.println("Enter destination :");
                             int dLatitude = exceptionHandling.latitudeException();
-                            System.out.println("Longitude: ");
                             int dLongitude = exceptionHandling.longitudeException(dLatitude);
                             
                             System.out.println("Searching for cabs...");
@@ -45,15 +45,32 @@ public class LoginPassenger {
                             Location source = new Location(sLatitude, sLongitude);
                             Location dest = new Location(dLatitude, dLongitude);
                             String availableDriverID = bm.findNearestCab(source, vehicleType);
-                            System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
+                            if(availableDriverID.equals("lol")) System.out.println("cab not available");
+                            
+                            else{
+                                    System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
+                                    //String id = availableDriverID;
+                                    
                             int confirmation = addInput.nextInt();
                             switch (confirmation) { //Confirm initially
                                 case 1: {
+                                    if(mManager.userBooking.get(availableDriverID)!=null)
+                                    {
+                                            mManager.userBooking.get(availableDriverID).add(bm.getBookingID());
+                                    }
+                                    else
+                                    {
+                                            ArrayList<String> al = new ArrayList<>();
+                                            al.add(bm.getBookingID());
+                                            mManager.userBooking.put(availableDriverID,al);
+                                    }
                                     System.out.println("Your cab will arrive shortly\n1.Confirm arrival of cab and start ride");
                                     System.out.println("2. Cancel ride (will incur cancellation charges)");
                                     int confirmation2 = addInput.nextInt();
                                     switch (confirmation2) {
+                                        
                                         case 1: { //Confirm ride start
+                                            
                                             System.out.println("Ride has started!");
                                             Ride r = bm.startRide(source, dest, availableDriverID);
                                             System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
@@ -110,11 +127,14 @@ public class LoginPassenger {
                                     break;
                                 }
                             }
+                        }
                             break;
                         }
+                        
                         case 2:
                             {
                                 u.viewRideHistory(userId);
+                                //System.out.println(userId);
                                 break;
                             }
                         case 3:
