@@ -39,11 +39,11 @@ public Payment(String mode, Double amount, String bid,String passID)
 
 public void processPayment()
 {
-	if (mode.equals("cash"))
+	if (this.mode.equals("cash"))
 	{
 		System.out.println("Paid in cash to driver");
 	}
-	else if(mode.equals("ewallet"))
+	else if(this.mode.equals("e-wallet"))
 	{
 		System.out.println("Paid using ewallet");
 		

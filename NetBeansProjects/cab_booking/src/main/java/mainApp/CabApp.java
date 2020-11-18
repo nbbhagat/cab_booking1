@@ -31,23 +31,32 @@ public class CabApp {
                     System.out.println("1. Enter UserId and password");
                     String userId=addInput.next();
                     String userPass=addInput.next();
-                    System.out.println(MManager.userMap);
+                    //System.out.println(MManager.userMap);
+                    
                     User u=MManager.userMap.get(userId);
                     //u.getMManager().getInstance();
-                    if(userId.charAt(0)=='P'&&u.getPassword().equals(userPass)){
-                        
-                        loginPassenger.doFun(u, AObj);
-                    }    
-                    else if(userId.charAt(0)=='D'&&u.getPassword().equals(userPass)){
-                        
-                        loginDriver.doFun(u, AObj);
-                    }    
+                    if(u!=null){
+                        if(userId.charAt(0)=='P'&&u.getPassword().equals(userPass)){
+
+                            loginPassenger.doFun(u, AObj);
+                        }    
+                        else if(userId.charAt(0)=='D'&&u.getPassword().equals(userPass)){
+
+                            loginDriver.doFun(u, AObj);
+                        }    
+                        else{
+                                System.out.println("Incorrect credentials");
+                        }
+                    }
                     else{
-                            System.out.println("Incorrect credentials");
+                        System.out.println("Invalid Credentials");
                     }
             }
             else if(option==3){
                     AObj.saveAndExit();
+            }
+            else {
+                System.out.println("Input invalid");
             }
         }
     }

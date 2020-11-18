@@ -48,35 +48,36 @@ public class LoginPassenger {
                             if(availableDriverID.equals("lol")) System.out.println("cab not available");
                             
                             else{
-                                    System.out.println("Driver will be assigned with driver ID " + availableDriverID + "on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
+                                    System.out.println("Driver will be assigned with driver ID " + availableDriverID + " on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
                                     //String id = availableDriverID;
                                     
                             int confirmation = addInput.nextInt();
                             switch (confirmation) { //Confirm initially
                                 case 1: {
-                                    if(mManager.userBooking.get(availableDriverID)!=null)
-                                    {
-                                            mManager.userBooking.get(availableDriverID).add(bm.getBookingID());
-                                    }
-                                    else
-                                    {
-                                            ArrayList<String> al = new ArrayList<>();
-                                            al.add(bm.getBookingID());
-                                            mManager.userBooking.put(availableDriverID,al);
-                                    }
-                                    System.out.println("Your cab will arrive shortly\n1.Confirm arrival of cab and start ride");
-                                    System.out.println("2. Cancel ride (will incur cancellation charges)");
-                                    int confirmation2 = addInput.nextInt();
+                                            if(mManager.userBooking.get(availableDriverID)!=null)
+                                            {
+                                                    mManager.userBooking.get(availableDriverID).add(bm.getBookingID());
+                                            }
+                                            else
+                                            {
+                                                    ArrayList<String> al = new ArrayList<>();
+                                                    al.add(bm.getBookingID());
+                                                    mManager.userBooking.put(availableDriverID,al);
+                                            }
+                                        System.out.println("Your cab will arrive shortly\n1.Confirm arrival of cab and start ride");
+                                            System.out.println("2. Cancel ride (will incur cancellation charges)");
+                                            int confirmation2 = addInput.nextInt();
+                                        Ride r = bm.startRide(source, dest, availableDriverID);
                                     switch (confirmation2) {
                                         
                                         case 1: { //Confirm ride start
                                             
                                             System.out.println("Ride has started!");
-                                            Ride r = bm.startRide(source, dest, availableDriverID);
+                                            //Ride r = bm.startRide(source, dest, availableDriverID);
                                             System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
                                             String arrived = addInput.next();
-                                            System.out.println("You have arrived at your destination! Please rate your ride (1-5):");
-                                            int rating = addInput.nextInt();
+                                            System.out.println("You have arrived at your destination! ");
+                                            int rating = exceptionHandling.ratingException();
 
                                             double amount = bm.calculateFare(source, dest, mManager.driverVehicle.get(availableDriverID));
                                             bm.endRide(r, rating, availableDriverID);
@@ -100,15 +101,16 @@ public class LoginPassenger {
                                             System.out.println("Please select your mode of payment");
                                             System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
                                             int option4 = addInput.nextInt();
+                                            bm.endRide(r, 0, availableDriverID);
                                             switch (option4) {
                                                 case 1: { //cash
 
-                                                    bm.cancelRide("Cash", userId);
+                                                    bm.cancelRide("cash", userId);
                                                     break;
                                                 }
                                                 case 2: { //e-wallet
 
-                                                    bm.cancelRide("E-wallet", userId);
+                                                    bm.cancelRide("e-wallet", userId);
 
 
                                                     break;

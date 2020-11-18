@@ -33,11 +33,14 @@ public class LoginDriver {
                             int input1 = input.nextInt();
                             if (input1 == 1) {
                                 ((Driver) u).setSstatus();
+                                mManager.userMap.put(u.getUserId(),u);
                                 System.out.println("Status changed to" + statusOppString);
                             } else {
                                 System.out.println("Status remains as " + statusString);
                             }
+                            
                             break;
+                            
                     }
 
                     case 2: {
@@ -47,6 +50,7 @@ public class LoginDriver {
                         Location location = new Location(latitude, longitude);
                         u.setLocation(location);
                         System.out.println("Location updated");
+                        mManager.userMap.put(u.getUserId(),u);
                         break;
 
                     }

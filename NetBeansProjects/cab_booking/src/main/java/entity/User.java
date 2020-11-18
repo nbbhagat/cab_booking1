@@ -47,9 +47,8 @@ public class User implements java.io.Serializable {
                                 String bookingId=record.get(i) ;
                                 Ride ride=mManager.rideMap.get(bookingId);
                                 if(ride!=null)
-                                    System.out.println(i+1+". "+ride);
-                                else
-                                    System.out.println(i+1+". Ride cancelled");
+                                    System.out.println("-> "+ride);
+                                
                         }
 
                     }
@@ -64,11 +63,13 @@ public class User implements java.io.Serializable {
                     for (int i = 0; i < record.size(); i++) {
                             String bookingId=record.get(i) ;
                             Payment payment =mManager.payMap.get(bookingId);
-                            System.out.println(i+1+". "+payment);
+                            if(payment!=null)
+                            System.out.println("-> " +payment);
                     }
 
                 }
-                else  System.out.println("No record found");
+                 else  System.out.println("No record found");
+                
         }
 }
 

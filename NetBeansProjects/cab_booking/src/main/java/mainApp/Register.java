@@ -22,7 +22,7 @@ public class Register {
                 {
                     System.out.println("Enter Name:");
                     String name = addInput.next();
-                    System.out.println("Enter Current location:");
+                    
                     String pno=exceptionHandling.phoneNoException();
                     String pwd=exceptionHandling.passwordException();
                     

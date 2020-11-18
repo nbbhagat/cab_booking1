@@ -9,7 +9,23 @@ import java.util.Scanner;
 
 public class ExceptionHandling {
    Scanner sc = new Scanner(System.in);
-    
+    public int ratingException(){
+        int rating ;
+        boolean flag=true;
+        do {
+                if(flag==false)
+                    System.out.println("Invalid rating");
+                
+                System.out.println("Enter the rating(1-5)");
+                while (!sc.hasNextInt()) {
+                    System.out.println("That's not a valid rating!");
+                    sc.next(); // this is important!
+                }
+                rating = sc.nextInt();
+                flag=false;
+            } while (rating>5||rating<1);
+        return rating;
+    }
     public String passwordException(){
         boolean flag=true;
         String pwd;
@@ -75,7 +91,7 @@ public class ExceptionHandling {
                 if(flag==false)
                     System.out.println("Invalid coordinate");
                 
-                System.out.println("Enter the Location:\nLatitude: (1-100)");
+                System.out.println("Enter the Location:\nLatitude: (0-100)");
                 while (!sc.hasNextInt()) {
                     System.out.println("That's not a valid latitude!");
                     sc.next(); // this is important!

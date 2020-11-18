@@ -52,7 +52,7 @@ public class BookingMgmt {
 			System.out.println(entry1.getValue().getVId().charAt(1)+" "+vehicleType);		
 			System.out.println(mManager.userMap.get(entry1.getKey()));
 		}
-		System.out.println("All fine till now");
+		//System.out.println("All fine till now");
 		ConcurrentMap<String, Vehicle> availableDrivers = 
 		    map.entrySet()
 		       .stream()
@@ -132,14 +132,21 @@ public class BookingMgmt {
 	}
 	public void endRide(Ride r, int rating, String driverID) {
 		String endTime = LocalTime.now().toString();
-		r.setStatus("Completed");
+		r.setStatus("Cancelled");
 		r.setEndTime(endTime);
-		r.setRating(rating);
+                Driver d = (Driver)mManager.userMap.get(driverID);
+                
+		if(rating!=0) {
+                    r.setStatus("Completed");
+                    r.setRating(rating);
+                    d.setNumRides1();
+                    d.setAvgRating1(rating);
+                    Location dlocation = r.getDest();
+                    d.setLocation(dlocation);
+                }
 		mManager.rideMap.put(this.bookingID,r);
-		Driver d = (Driver)mManager.userMap.get(driverID);
+		
 		d.setSstatus() ;
-                Location dlocation = r.getDest();
-                d.setLocation(dlocation);
 		mManager.userMap.put(driverID,d);
 	} 
 	public void cancelRide(String mode,  String passID) {
@@ -152,7 +159,9 @@ public class BookingMgmt {
 	public void makePayment(String mode, double amount,  String passID) {
 		Payment p = new Payment(mode, amount, this.bookingID, passID);
 		p.setComments(paymentType.RIDE_FEE);
+                //p.setMode(mode)=mode;
 		p.processPayment();
+                
 		mManager.payMap.put(this.bookingID, p);
 	}
 }
