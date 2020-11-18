@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import dataStore.MemManager;
+import lombok.experimental.SuperBuilder;
 import service.Payment;
 import service.Ride;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 @Getter 
 @Setter
+@SuperBuilder
 public class User implements java.io.Serializable {
         private MemManager mManager;
         

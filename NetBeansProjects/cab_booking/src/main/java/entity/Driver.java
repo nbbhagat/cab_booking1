@@ -3,9 +3,11 @@ package entity;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter 
 @Setter
+@SuperBuilder
 public class Driver extends User implements java.io.Serializable {
         boolean status;
         Vehicle vehicle;

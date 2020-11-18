@@ -1,7 +1,10 @@
 package entity;
 
-import java.util.UUID;
+import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
+import java.util.UUID;
+@SuperBuilder
 public class Passenger extends User implements java.io.Serializable {
      public Passenger(String name, String phoneNo,String password, Location location){
             super(name,phoneNo,password,location);
