@@ -42,16 +42,20 @@ public class User implements java.io.Serializable {
         public  void viewRideHistory(String userId){
                 this.mManager=MemManager.getInstance();
                 ArrayList<String> record= mManager.userBooking.get(userId);
-                    
+                    int flag=0;
                     if(record!=null)
                     {
                         for (int i = 0; i < record.size(); i++) {
                                 String bookingId=record.get(i) ;
                                 Ride ride=mManager.rideMap.get(bookingId);
-                                if(ride!=null)
+                                if(ride!=null) {
                                     System.out.println("-> "+ride);
+                                    flag=1;
+                                }
                                 
                         }
+                        if(flag==0)
+                            System.out.println("No record found");
 
                     }
                     else  System.out.println("No record found");
@@ -60,15 +64,19 @@ public class User implements java.io.Serializable {
         public  void viewPaymentHistory(String userId){
             this.mManager=MemManager.getInstance();
                 ArrayList<String> record= mManager.userBooking.get(userId);
+                int flag=0;
                 if(record!=null)
                 {
                     for (int i = 0; i < record.size(); i++) {
                             String bookingId=record.get(i) ;
                             Payment payment =mManager.payMap.get(bookingId);
-                            if(payment!=null)
-                            System.out.println("-> " +payment);
+                            if(payment!=null) {
+                                System.out.println("-> " +payment);
+                                flag=1;
+                            }
                     }
-
+                    if(flag==0)
+                        System.out.println("No record found");
                 }
                  else  System.out.println("No record found");
                 
