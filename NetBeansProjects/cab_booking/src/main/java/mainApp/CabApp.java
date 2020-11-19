@@ -12,15 +12,16 @@ public class CabApp {
         Register register= new Register();
         LoginDriver loginDriver=new LoginDriver();
         LoginPassenger loginPassenger=new LoginPassenger();
+        InputValidation inputValidation = new InputValidation();
         while (true) {
             
             System.out.println("Cab Booking Application");
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("3. Save and Exit");
-            System.out.println("Enter an option - ");
+//            System.out.println("Enter an option - ");
             Scanner input = new Scanner(System.in);
-            int option = input.nextInt();
+            int option = inputValidation.optionValidation(3);
 
             if (option==1) {
                 

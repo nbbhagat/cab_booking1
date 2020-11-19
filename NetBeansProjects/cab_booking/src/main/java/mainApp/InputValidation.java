@@ -9,6 +9,23 @@ import java.util.Scanner;
 
 public class InputValidation {
    Scanner sc = new Scanner(System.in);
+    public int optionValidation(int max){
+        int rating ;
+        boolean flag=true;
+        do {
+                if(flag==false)
+                    System.out.println("Invalid option");
+                
+                System.out.println("Enter the option(1-" + max + ")");
+                while (!sc.hasNextInt()) {
+                    System.out.println("That's not a valid option!");
+                    sc.next(); // this is important!
+                }
+                rating = sc.nextInt();
+                flag=false;
+            } while (rating>max||rating<1);
+        return rating;
+    }
     public int ratingValidation(){
         int rating ;
         boolean flag=true;

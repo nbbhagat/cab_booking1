@@ -14,7 +14,7 @@ public class LoginDriver {
         boolean login = true;
         while (login) {    
             String userId=u.getUserId();
-            InputValidation exceptionHandling=new InputValidation();
+            InputValidation inputValidation=new InputValidation();
             Scanner input = new Scanner(System.in);
             System.out.println("1. Set status");
             System.out.println("2. Update current location");
@@ -22,7 +22,7 @@ public class LoginDriver {
             System.out.println("4. Logout");
             System.out.println("Enter an option:");
             Scanner input2 = new Scanner(System.in);
-            int option_1 = input2.nextInt();
+            int option_1 = inputValidation.optionValidation(4);
             switch (option_1) {
                     case 1: {
                             boolean status = ((Driver) u).isStatus();
@@ -30,7 +30,7 @@ public class LoginDriver {
                             String statusOppString = (status==true)?"Unavailable":"Available";
                             System.out.println("Your current status is " + statusString);
                             System.out.println("If u want to change to " + statusOppString + ", press 1. Press 2 otherwise:");
-                            int input1 = input.nextInt();
+                            int input1 = inputValidation.optionValidation(2);
                             if (input1 == 1) {
                                 ((Driver) u).setSstatus();
                                 mManager.userMap.put(u.getUserId(),u);
@@ -45,8 +45,8 @@ public class LoginDriver {
 
                     case 2: {
                         System.out.println("Enter your current location");
-                        int latitude = exceptionHandling.latitudeValidation();
-                        int longitude = exceptionHandling.longitudeValidation(latitude);
+                        int latitude = inputValidation.latitudeValidation();
+                        int longitude = inputValidation.longitudeValidation(latitude);
                         Location location = new Location(latitude, longitude);
                         u.setLocation(location);
                         System.out.println("Location updated");

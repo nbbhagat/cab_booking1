@@ -18,27 +18,27 @@ public class LoginPassenger {
             BookingMgmt bm = new BookingMgmt();
             Scanner addInput = new Scanner(System.in);
                 boolean login = true;
-                InputValidation exceptionHandling=new InputValidation();
+                InputValidation inputValidation=new InputValidation();
                 while (login) {
                     System.out.println("1. Book Cab");
                     System.out.println("2. View Ride History");
                     System.out.println("3. View Payment History");
                     System.out.println("4. Logout");
-                    System.out.println("Enter an option - ");
-                    int option3 = addInput.nextInt();
+//                    System.out.println("Enter an option - ");
+                    int option3 = inputValidation.optionValidation(4);
 
                     switch (option3) {
                         case 1: { //Book Cab
                             System.out.println("Current location ");
-                            int sLatitude = exceptionHandling.latitudeValidation();
+                            int sLatitude = inputValidation.latitudeValidation();
                             
-                            int sLongitude = exceptionHandling.longitudeValidation(sLatitude);                                                       
+                            int sLongitude = inputValidation.longitudeValidation(sLatitude);                                                       
                             Scanner sc = new Scanner(System.in);
-                            char  vehicleType = exceptionHandling.vehicleTypeValidation();
+                            char  vehicleType = inputValidation.vehicleTypeValidation();
                             
                             System.out.println("Enter destination :");
-                            int dLatitude = exceptionHandling.latitudeValidation();
-                            int dLongitude = exceptionHandling.longitudeValidation(dLatitude);
+                            int dLatitude = inputValidation.latitudeValidation();
+                            int dLongitude = inputValidation.longitudeValidation(dLatitude);
                             
                             System.out.println("Searching for cabs...");
                             bm.createNewBooking(userId);
@@ -48,10 +48,10 @@ public class LoginPassenger {
                             if(availableDriverID.equals("lol")) System.out.println("cab not available");
                             
                             else{
-                                    System.out.println("Driver will be assigned with driver ID " + availableDriverID + " on confirmation.\n1. Confirm\n2. Cancel\nEnter your choice:");
+                                    System.out.println("Driver will be assigned with driver ID " + availableDriverID + " on confirmation.\n1. Confirm\n2. Cancel");
                                     //String id = availableDriverID;
                                     
-                            int confirmation = addInput.nextInt();
+                            int confirmation = inputValidation.optionValidation(2);
                             switch (confirmation) { //Confirm initially
                                 case 1: {
                                             if(mManager.userBooking.get(availableDriverID)!=null)
@@ -66,7 +66,7 @@ public class LoginPassenger {
                                             }
                                         System.out.println("Your cab will arrive shortly\n1.Confirm arrival of cab and start ride");
                                             System.out.println("2. Cancel ride (will incur cancellation charges)");
-                                            int confirmation2 = addInput.nextInt();
+                                            int confirmation2 = inputValidation.optionValidation(2);
                                         Ride r = bm.startRide(source, dest, availableDriverID);
                                     switch (confirmation2) {
                                         
@@ -77,13 +77,13 @@ public class LoginPassenger {
                                             System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
                                             String arrived = addInput.next();
                                             System.out.println("You have arrived at your destination! ");
-                                            int rating = exceptionHandling.ratingValidation();
+                                            int rating = inputValidation.ratingValidation();
 
                                             double amount = bm.calculateFare(source, dest, mManager.driverVehicle.get(availableDriverID));
                                             bm.endRide(r, rating, availableDriverID);
                                             System.out.println("Please select your mode of payment");
-                                            System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
-                                            int option4 = addInput.nextInt();
+                                            System.out.println("1. Cash\n2. E-Wallet");
+                                            int option4 = inputValidation.optionValidation(2);
                                             switch (option4) {
                                                 case 1: { //Cash
                                                     bm.makePayment("cash", amount, userId);
@@ -99,8 +99,8 @@ public class LoginPassenger {
                                         case 2: { //Cancel ride
                                             System.out.println("Your cancellation charges are: " + bm.cancelAmount);
                                             System.out.println("Please select your mode of payment");
-                                            System.out.println("1. Cash\n2. E-Wallet\nEnter your choice:");
-                                            int option4 = addInput.nextInt();
+                                            System.out.println("1. Cash\n2. E-Wallet");
+                                            int option4 = inputValidation.optionValidation(2);
                                             bm.endRide(r, 0, availableDriverID);
                                             switch (option4) {
                                                 case 1: { //cash
