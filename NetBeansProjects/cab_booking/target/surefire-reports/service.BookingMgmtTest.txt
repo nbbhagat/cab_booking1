@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: service.BookingMgmtTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.109 sec <<< FAILURE!
+service.BookingMgmtTest.testFindNearestCab()  Time elapsed: 0.106 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "entity.Driver.isStatus()" because the return value of "java.util.concurrent.ConcurrentHashMap.get(Object)" is null
+	at service.BookingMgmt.lambda$findNearestCab$1(BookingMgmt.java:60)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:176)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.concurrent.ConcurrentHashMap$EntrySpliterator.forEachRemaining(ConcurrentHashMap.java:3652)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at service.BookingMgmt.findNearestCab(BookingMgmt.java:62)
+	at service.BookingMgmtTest.testFindNearestCab(BookingMgmtTest.java:73)
+
