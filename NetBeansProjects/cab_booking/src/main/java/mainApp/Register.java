@@ -12,7 +12,7 @@ public class Register {
     public Register(){
         this.mManager=MemManager.getInstance();
     }
-    ExceptionHandling exceptionHandling=new ExceptionHandling();
+    InputValidation exceptionHandling=new InputValidation();
     public void doFun(Admin AObj){
         Scanner addInput = new Scanner(System.in);
         System.out.println("Register : 1. Passenger 2. Driver");
@@ -23,11 +23,11 @@ public class Register {
                     System.out.println("Enter Name:");
                     String name = addInput.next();
                     
-                    String pno=exceptionHandling.phoneNoException();
-                    String pwd=exceptionHandling.passwordException();
+                    String pno=exceptionHandling.phoneNoValidation();
+                    String pwd=exceptionHandling.passwordValidation();
                     
-                    int sLatitude=exceptionHandling.latitudeException();
-                    int sLongitude=exceptionHandling.longitudeException(sLatitude);
+                    int sLatitude=exceptionHandling.latitudeValidation();
+                    int sLongitude=exceptionHandling.longitudeValidation(sLatitude);
                     
                     Location l = new Location(sLatitude,sLongitude);
                     AObj.registerPassenger( name, pno, pwd, l);
@@ -38,21 +38,21 @@ public class Register {
                     System.out.println("Enter Name:");
                     String name = addInput.next();
                     Scanner sc = new Scanner(System.in);
-                    String pno=exceptionHandling.phoneNoException();
-                    String pwd=exceptionHandling.passwordException();
+                    String pno=exceptionHandling.phoneNoValidation();
+                    String pwd=exceptionHandling.passwordValidation();
                     
                     System.out.println("Enter Current location:");
-                    int dLatitude=exceptionHandling.latitudeException();
-                    int dLongitude=exceptionHandling.longitudeException(dLatitude);
+                    int dLatitude=exceptionHandling.latitudeValidation();
+                    int dLongitude=exceptionHandling.longitudeValidation(dLatitude);
                     
                     Location l = new Location(dLatitude, dLongitude);
-                    int answer= exceptionHandling.statusException();
+                    int answer= exceptionHandling.statusValidation();
                     boolean status = false;
                     switch(answer) {
                         case 1 -> status = true;
                         case 2 -> status = false;
                     }
-                    char type=exceptionHandling.vehicleTypeException();
+                    char type=exceptionHandling.vehicleTypeValidation();
                     switch(type){
                             case 'A' : {
                                 Auto auto=new Auto();

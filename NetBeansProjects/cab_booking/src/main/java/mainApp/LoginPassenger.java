@@ -18,7 +18,7 @@ public class LoginPassenger {
             BookingMgmt bm = new BookingMgmt();
             Scanner addInput = new Scanner(System.in);
                 boolean login = true;
-                ExceptionHandling exceptionHandling=new ExceptionHandling();
+                InputValidation exceptionHandling=new InputValidation();
                 while (login) {
                     System.out.println("1. Book Cab");
                     System.out.println("2. View Ride History");
@@ -30,15 +30,15 @@ public class LoginPassenger {
                     switch (option3) {
                         case 1: { //Book Cab
                             System.out.println("Current location ");
-                            int sLatitude = exceptionHandling.latitudeException();
+                            int sLatitude = exceptionHandling.latitudeValidation();
                             
-                            int sLongitude = exceptionHandling.longitudeException(sLatitude);                                                       
+                            int sLongitude = exceptionHandling.longitudeValidation(sLatitude);                                                       
                             Scanner sc = new Scanner(System.in);
-                            char  vehicleType = exceptionHandling.vehicleTypeException();
+                            char  vehicleType = exceptionHandling.vehicleTypeValidation();
                             
                             System.out.println("Enter destination :");
-                            int dLatitude = exceptionHandling.latitudeException();
-                            int dLongitude = exceptionHandling.longitudeException(dLatitude);
+                            int dLatitude = exceptionHandling.latitudeValidation();
+                            int dLongitude = exceptionHandling.longitudeValidation(dLatitude);
                             
                             System.out.println("Searching for cabs...");
                             bm.createNewBooking(userId);
@@ -77,7 +77,7 @@ public class LoginPassenger {
                                             System.out.println("Ride is ongoing...\nPress any key to confirm arrival at destination:");
                                             String arrived = addInput.next();
                                             System.out.println("You have arrived at your destination! ");
-                                            int rating = exceptionHandling.ratingException();
+                                            int rating = exceptionHandling.ratingValidation();
 
                                             double amount = bm.calculateFare(source, dest, mManager.driverVehicle.get(availableDriverID));
                                             bm.endRide(r, rating, availableDriverID);

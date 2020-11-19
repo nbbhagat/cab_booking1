@@ -14,7 +14,7 @@ public class LoginDriver {
         boolean login = true;
         while (login) {    
             String userId=u.getUserId();
-            ExceptionHandling exceptionHandling=new ExceptionHandling();
+            InputValidation exceptionHandling=new InputValidation();
             Scanner input = new Scanner(System.in);
             System.out.println("1. Set status");
             System.out.println("2. Update current location");
@@ -45,8 +45,8 @@ public class LoginDriver {
 
                     case 2: {
                         System.out.println("Enter your current location");
-                        int latitude = exceptionHandling.latitudeException();
-                        int longitude = exceptionHandling.longitudeException(latitude);
+                        int latitude = exceptionHandling.latitudeValidation();
+                        int longitude = exceptionHandling.longitudeValidation(latitude);
                         Location location = new Location(latitude, longitude);
                         u.setLocation(location);
                         System.out.println("Location updated");

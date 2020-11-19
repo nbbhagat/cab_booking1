@@ -7,9 +7,9 @@ package mainApp;
 
 import java.util.Scanner;
 
-public class ExceptionHandling {
+public class InputValidation {
    Scanner sc = new Scanner(System.in);
-    public int ratingException(){
+    public int ratingValidation(){
         int rating ;
         boolean flag=true;
         do {
@@ -26,7 +26,7 @@ public class ExceptionHandling {
             } while (rating>5||rating<1);
         return rating;
     }
-    public String passwordException(){
+    public String passwordValidation(){
         boolean flag=true;
         String pwd;
         do {
@@ -43,7 +43,7 @@ public class ExceptionHandling {
             } while (pwd.length() < 8);
         return pwd;
     }
-    public int statusException(){
+    public int statusValidation(){
         int answer;
         boolean flag=true;
             do {
@@ -62,7 +62,7 @@ public class ExceptionHandling {
             } while (answer!=1&&answer!=2);
             return answer;
     }
-    public char vehicleTypeException(){
+    public char vehicleTypeValidation(){
         boolean flag=true;
         char answer;
             do {
@@ -84,7 +84,7 @@ public class ExceptionHandling {
     }
     
     
-    public int latitudeException(){
+    public int latitudeValidation(){
         int latitude;
         boolean flag=true;
         do {
@@ -101,7 +101,7 @@ public class ExceptionHandling {
             } while (latitude>100||latitude<0);
         return latitude;
     }
-    public int longitudeException(int latitude){
+    public int longitudeValidation(int latitude){
             int longitude;
             boolean flag=true;
             int low;
@@ -138,7 +138,7 @@ public class ExceptionHandling {
         return longitude;
     }
     
-    public String phoneNoException(){
+    public String phoneNoValidation(){
         boolean flag=true;
         String pno;
         do {
